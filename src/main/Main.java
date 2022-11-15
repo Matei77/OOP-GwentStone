@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.Input;
+import game_engine.GameEngine;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +72,9 @@ public final class Main {
         ArrayNode output = objectMapper.createArrayNode();
 
         //TODO add here the entry point to your implementation
+        GameEngine.getEngine().setInputData(inputData);
+        GameEngine.getEngine().setOutput(output);
+        GameEngine.getEngine().runEngine();
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);
