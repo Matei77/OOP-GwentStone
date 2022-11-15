@@ -2,6 +2,11 @@ package utils;
 
 public final class Constants {
   private Constants() {}
+  public static final int MAX_MANA_PER_ROUND = 10;
+  public static final int ROWS_MAX_INDEX = 3;
+
+  public static final int PLAYER_ONE_TURN = 1;
+  public static final int PLAYER_TWO_TURN = 2;
 
   public static final String MINION = "Minion";
   public static final String ENVIRONMENT = "Environment";
@@ -25,7 +30,6 @@ public final class Constants {
   public static final String KING_MUDFACE = "King Mudface";
   public static final String GENERAL_KOCIORAW = "General Kocioraw";
 
-  public static final int ROWS_MAX_INDEX = 3;
 
   public static final String END_PLAYER_TURN = "endPlayerTurn";
   public static final String PLACE_CARD = "placeCard";

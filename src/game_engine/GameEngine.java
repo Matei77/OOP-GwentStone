@@ -22,6 +22,7 @@ public class GameEngine {
 
   private int currentGameNr = 0;
   private int currentRoundNr = 0;
+  private int startingPlayer;
   private int playerTurn;
   private int shuffleSeed;
   private Input inputData;
@@ -38,7 +39,6 @@ public class GameEngine {
     ArrayList<GameInput> games = inputData.getGames();
     for (GameInput game : games) {
       GameActions.startGame(game);
-      currentRoundNr = 1;
       GameActions.startRound();
       GameActions.executeActions(game.getActions());
       currentGameNr++;
@@ -60,6 +60,14 @@ public class GameEngine {
 
   public void setCurrentRoundNr(int currentRoundNr) {
     this.currentRoundNr = currentRoundNr;
+  }
+
+  public int getStartingPlayer() {
+    return startingPlayer;
+  }
+
+  public void setStartingPlayer(int startingPlayer) {
+    this.startingPlayer = startingPlayer;
   }
 
   public int getPlayerTurn() {

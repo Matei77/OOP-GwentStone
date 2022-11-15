@@ -3,6 +3,7 @@ package game_engine;
 import card_types.Card;
 import card_types.Environment;
 import card_types.Hero;
+import card_types.Minion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -16,9 +17,9 @@ import java.util.List;
 import static utils.Constants.*;
 
 public class Debug {
-  public static void getCardsInHand(ActionsInput action, GameEngine engine) {
+  public static void getCardsInHand(ActionsInput action) {
     int playerIdx = action.getPlayerIdx();
-    Player player = getPlayer(playerIdx, engine);
+    Player player = getPlayer(playerIdx);
 
     ObjectMapper mapper = new ObjectMapper();
     ArrayNode cards = mapper.createArrayNode();
@@ -34,17 +35,13 @@ public class Debug {
     commandObjectNode.put("playerIdx", playerIdx);
     commandObjectNode.set("output", cards);
 
-    ArrayNode output = engine.getOutput();
+    ArrayNode output = GameEngine.getEngine().getOutput();
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getPlayerDeck(ActionsInput action, GameEngine engine) {
+  public static void getPlayerDeck(ActionsInput action) {
     int playerIdx = action.getPlayerIdx();
-    Player player = null;
-    if (playerIdx == 1)
-      player = engine.getPlayerOne();
-    else
-      player = engine.getPlayerTwo();
+    Player player = getPlayer(playerIdx);
 
     Deck playerCurrentDeck = player.getCurrentDeck();
 
@@ -61,26 +58,26 @@ public class Debug {
     commandObjectNode.put("playerIdx", playerIdx);
     commandObjectNode.set("output", cards);
 
-    ArrayNode output = engine.getOutput();
+    ArrayNode output = GameEngine.getEngine().getOutput();
     output.addAll(List.of(commandObjectNode));
   }
 
   public static void getCardsOnTable(ArrayList<ArrayList<Card>> table) {}
 
-  public static void getPlayerTurn(GameEngine engine) {
+  public static void getPlayerTurn() {
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode commandObjectNode = mapper.createObjectNode();
     commandObjectNode.put("command", GET_PLAYER_TURN);
-    commandObjectNode.put("output", engine.getPlayerTurn());
+    commandObjectNode.put("output", GameEngine.getEngine().getPlayerTurn());
 
-    ArrayNode output = engine.getOutput();
+    ArrayNode output = GameEngine.getEngine().getOutput();
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getPlayerHero(ActionsInput action, GameEngine engine) {
+  public static void getPlayerHero(ActionsInput action) {
     // get the player's hero
     int playerIdx = action.getPlayerIdx();
-    Player player = getPlayer(playerIdx, engine);
+    Player player = getPlayer(playerIdx);
     Hero hero = player.getHero();
 
     // generate the output for the command
@@ -93,15 +90,15 @@ public class Debug {
     commandObjectNode.put("playerIdx", playerIdx);
     commandObjectNode.set("output", outputObjectNode);
 
-    ArrayNode output = engine.getOutput();
+    ArrayNode output = GameEngine.getEngine().getOutput();
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getCardAtPosition(ArrayList<ArrayList<Card>> table) {}
+  public static void getCardAtPosition(ArrayList<ArrayList<Minion>> table) {}
 
-  public static void getPlayerMana(ActionsInput action, GameEngine engine) {
+  public static void getPlayerMana(ActionsInput action) {
     int playerIdx = action.getPlayerIdx();
-    Player player = getPlayer(playerIdx, engine);
+    Player player = getPlayer(playerIdx);
 
     ObjectMapper mapper = new ObjectMapper();
     ObjectNode commandObjectNode = mapper.createObjectNode();
@@ -109,13 +106,13 @@ public class Debug {
     commandObjectNode.put("playerIdx", playerIdx);
     commandObjectNode.put("output", player.getMana());
 
-    ArrayNode output = engine.getOutput();
+    ArrayNode output = GameEngine.getEngine().getOutput();
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getEnvironmentCardsInHand(ActionsInput action, GameEngine engine) {
+  public static void getEnvironmentCardsInHand(ActionsInput action) {
     int playerIdx = action.getPlayerIdx();
-    Player player = getPlayer(playerIdx, engine);
+    Player player = getPlayer(playerIdx);
 
     ObjectMapper mapper = new ObjectMapper();
     ArrayNode cards = mapper.createArrayNode();
@@ -133,7 +130,7 @@ public class Debug {
     commandObjectNode.put("playerIdx", playerIdx);
     commandObjectNode.set("output", cards);
 
-    ArrayNode output = engine.getOutput();
+    ArrayNode output = GameEngine.getEngine().getOutput();
     output.addAll(List.of(commandObjectNode));
   }
 
@@ -165,12 +162,12 @@ public class Debug {
     return outputObjectNode;
   }
 
-  private static Player getPlayer(int playerIdx , GameEngine engine) {
+  private static Player getPlayer(int playerIdx) {
     Player player = null;
     if (playerIdx == 1)
-      player = engine.getPlayerOne();
+      player = GameEngine.getEngine().getPlayerOne();
     else
-      player = engine.getPlayerTwo();
+      player = GameEngine.getEngine().getPlayerTwo();
     return player;
   }
 }

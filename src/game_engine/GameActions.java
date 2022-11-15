@@ -7,6 +7,7 @@ import fileio.Input;
 import player.Player;
 import utils.Utils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static utils.Constants.*;
@@ -47,32 +48,58 @@ public class GameActions {
     playerTwo.getCurrentDeck().shuffleCards(shuffleSeed);
 
     // set starting player
-    int playerTurn = game.getStartGame().getStartingPlayer();
-    GameEngine.getEngine().setPlayerTurn(playerTurn);
+    int startingPlayer = game.getStartGame().getStartingPlayer();
+    GameEngine.getEngine().setStartingPlayer(startingPlayer);
+    GameEngine.getEngine().setPlayerTurn(startingPlayer);
+
+    // reset card in hand
+    ArrayList<Card> cardsInHand = new ArrayList<Card>();
+    playerOne.setCardsInHand(cardsInHand);
+    cardsInHand = new ArrayList<Card>();
+    playerTwo.setCardsInHand(cardsInHand);
   }
 
   public static void startRound() {
     Player playerOne = GameEngine.getEngine().getPlayerOne();
     Player playerTwo = GameEngine.getEngine().getPlayerTwo();
-    int currentRoundNr = GameEngine.getEngine().getCurrentRoundNr();
+    int currentRoundNr = GameEngine.getEngine().getCurrentRoundNr() + 1;
+    GameEngine.getEngine().setCurrentRoundNr(currentRoundNr);
 
     // update hand and deck
-    ArrayList<Card> hand;
-    hand = playerOne.getCardsInHand();
-    hand.add(playerOne.getCurrentDeck().getCards().get(0));
-    playerOne.getCurrentDeck().getCards().remove(0);
+    ArrayList<Card> hand = null;
+    if (!playerOne.getCurrentDeck().getCards().isEmpty()) {
+      hand = playerOne.getCardsInHand();
+      hand.add(playerOne.getCurrentDeck().getCards().get(0));
+      playerOne.getCurrentDeck().getCards().remove(0);
+    }
 
-    hand = playerTwo.getCardsInHand();
-    hand.add(playerTwo.getCurrentDeck().getCards().get(0));
-    playerTwo.getCurrentDeck().getCards().remove(0);
+    if (!playerTwo.getCurrentDeck().getCards().isEmpty()) {
+      hand = playerTwo.getCardsInHand();
+      hand.add(playerTwo.getCurrentDeck().getCards().get(0));
+      playerTwo.getCurrentDeck().getCards().remove(0);
+    }
 
     // update mana
-    playerOne.setMana(playerOne.getMana() + currentRoundNr);
-    playerTwo.setMana(playerTwo.getMana() + currentRoundNr);
+    playerOne.setMana(playerOne.getMana() + Math.min(currentRoundNr, MAX_MANA_PER_ROUND));
+    playerTwo.setMana(playerTwo.getMana() + Math.min(currentRoundNr, MAX_MANA_PER_ROUND));
+
+    // TODO reset all cards attacked status
+
   }
 
   public static void endPlayerTurn() {
-    GameEngine.getEngine().setCurrentRoundNr(GameEngine.getEngine().getCurrentRoundNr() + 1);
+    if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN) {
+      // TODO unfreeze frozen minions for player1
+      GameEngine.getEngine().setPlayerTurn(PLAYER_TWO_TURN);
+    } else {
+      // TODO unfreeze frozen minions for player2
+      GameEngine.getEngine().setPlayerTurn(PLAYER_ONE_TURN);
+    }
+
+    // start next round
+    if (GameEngine.getEngine().getPlayerTurn() == GameEngine.getEngine().getStartingPlayer()) {
+      startRound();
+    }
   }
 
   public static void placeCard() {
@@ -125,26 +152,26 @@ public class GameActions {
           useEnvironmentCard();
           break;
         case GET_CARDS_IN_HAND:
-          Debug.getCardsInHand(action, GameEngine.getEngine());
+          Debug.getCardsInHand(action);
           break;
         case GET_PLAYER_DECK:
-          Debug.getPlayerDeck(action, GameEngine.getEngine());
+          Debug.getPlayerDeck(action);
           break;
         case GET_CARDS_ON_TABLE:
           break;
         case GET_PLAYER_TURN:
-          Debug.getPlayerTurn(GameEngine.getEngine());
+          Debug.getPlayerTurn();
           break;
         case GET_PLAYER_HERO:
-          Debug.getPlayerHero(action, GameEngine.getEngine());
+          Debug.getPlayerHero(action);
           break;
         case GET_CARD_AT_POSITION:
           break;
         case GET_PLAYER_MANA:
-          Debug.getPlayerMana(action, GameEngine.getEngine());
+          Debug.getPlayerMana(action);
           break;
         case GET_ENVIRONMENT_CARDS_IN_HAND:
-          Debug.getEnvironmentCardsInHand(action, GameEngine.getEngine());
+          Debug.getEnvironmentCardsInHand(action);
           break;
         case GET_FROZEN_CARDS_ON_TABLE:
           break;

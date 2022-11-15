@@ -9,10 +9,11 @@ public class Player {
   private ArrayList<Deck> decks;
   private int decksNr;
   private int nrCardsInDeck;
+
   private Deck currentDeck;
+  private ArrayList<Card> cardsInHand;
   private Hero hero;
   private int mana = 0;
-  private ArrayList<Card> cardsInHand = new ArrayList<>();
 
 
   public int getMana() {
