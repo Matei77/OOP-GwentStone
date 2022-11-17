@@ -1,5 +1,8 @@
 package card_types;
 
+import fileio.ActionsInput;
+import player.Player;
+
 import java.util.ArrayList;
 
 abstract public class Card {
@@ -15,6 +18,8 @@ abstract public class Card {
     this.colors = colors;
     this.name = name;
   }
+
+  public void placeCard(ActionsInput action, Player player) {}
 
   public int getHealth() {
     return -1;

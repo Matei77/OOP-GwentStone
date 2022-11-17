@@ -1,10 +1,12 @@
 package game_engine;
 
 import card_types.Card;
+import card_types.Environment;
 import fileio.ActionsInput;
 import fileio.GameInput;
 import fileio.Input;
 import player.Player;
+import utils.ErrorHandler;
 import utils.Utils;
 
 import java.lang.reflect.Array;
@@ -102,8 +104,16 @@ public class GameActions {
     }
   }
 
-  public static void placeCard() {
+  public static void placeCard(ActionsInput action) {
+    int handIndex = action.getHandIdx();
+    Player player;
+    int boardRow;
+    if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN)
+      player = GameEngine.getEngine().getPlayerOne();
+    else
+      player = GameEngine.getEngine().getPlayerTwo();
 
+    player.getCardsInHand().get(handIndex).placeCard(action, player);
   }
 
   public static void cardUsesAttack() {
@@ -134,7 +144,7 @@ public class GameActions {
           endPlayerTurn();
           break;
         case PLACE_CARD:
-          placeCard();
+          placeCard(action);
           break;
         case CARD_USES_ATTACK:
           cardUsesAttack();
@@ -158,6 +168,7 @@ public class GameActions {
           Debug.getPlayerDeck(action);
           break;
         case GET_CARDS_ON_TABLE:
+          Debug.getCardsOnTable();
           break;
         case GET_PLAYER_TURN:
           Debug.getPlayerTurn();

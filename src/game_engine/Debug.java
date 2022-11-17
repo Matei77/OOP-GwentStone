@@ -62,7 +62,28 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getCardsOnTable(ArrayList<ArrayList<Card>> table) {}
+  public static void getCardsOnTable() {
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    ObjectMapper mapper = new ObjectMapper();
+    ArrayNode rows = mapper.createArrayNode();
+
+    for (ArrayList<Minion> row : board) {
+      ArrayNode cards = mapper.createArrayNode();
+      for (Card card : row) {
+        ObjectNode cardObjectNode = createCardOutput(mapper, card);
+        cards.add(cardObjectNode);
+      }
+      rows.add(cards);
+    }
+
+
+    ObjectNode commandObjectNode = mapper.createObjectNode();
+    commandObjectNode.put("command", GET_CARDS_ON_TABLE);
+    commandObjectNode.set("output", rows);
+
+    ArrayNode output = GameEngine.getEngine().getOutput();
+    output.addAll(List.of(commandObjectNode));
+  }
 
   public static void getPlayerTurn() {
     ObjectMapper mapper = new ObjectMapper();
@@ -94,7 +115,7 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getCardAtPosition(ArrayList<ArrayList<Minion>> table) {}
+  public static void getCardAtPosition(ArrayList<ArrayList<Minion>> board) {}
 
   public static void getPlayerMana(ActionsInput action) {
     int playerIdx = action.getPlayerIdx();
@@ -134,7 +155,7 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getFrozenCardsOnTable(ArrayList<ArrayList<Card>> table) {}
+  public static void getFrozenCardsOnTable(ArrayList<ArrayList<Card>> board) {}
 
   public static void getTotalGamesPlayed(GameEngine gameEngine) {}
 

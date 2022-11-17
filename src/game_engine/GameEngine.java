@@ -28,13 +28,14 @@ public class GameEngine {
   private Input inputData;
   private ArrayNode output;
 
-  private Player playerOne = new Player();
-  private Player playerTwo = new Player();
+  private Player playerOne = new Player(PLAYER_ONE_FRONT_ROW, PLAYER_ONE_BACK_ROW);
+  private Player playerTwo = new Player(PLAYER_TWO_FRONT_ROW, PLAYER_TWO_BACK_ROW);
 
-  private ArrayList<ArrayList<Minion>> table = new ArrayList<ArrayList<Minion>>(ROWS_MAX_INDEX + 1);
+  private ArrayList<ArrayList<Minion>> board = new ArrayList<ArrayList<Minion>>(ROWS_MAX_INDEX + 1);
 
 
   public void runEngine() {
+    prepareBoard();
     GameActions.preparePlayers();
     ArrayList<GameInput> games = inputData.getGames();
     for (GameInput game : games) {
@@ -43,6 +44,17 @@ public class GameEngine {
       GameActions.executeActions(game.getActions());
       currentGameNr++;
     }
+  }
+
+  private void prepareBoard() {
+    ArrayList<Minion> row0 = new ArrayList<>(MAX_CARDS_PER_ROW);
+    ArrayList<Minion> row1 = new ArrayList<>(MAX_CARDS_PER_ROW);
+    ArrayList<Minion> row2 = new ArrayList<>(MAX_CARDS_PER_ROW);
+    ArrayList<Minion> row3 = new ArrayList<>(MAX_CARDS_PER_ROW);
+    board.add(row0);
+    board.add(row1);
+    board.add(row2);
+    board.add(row3);
   }
 
 
@@ -118,11 +130,11 @@ public class GameEngine {
     this.playerTwo = playerTwo;
   }
 
-  public ArrayList<ArrayList<Minion>> getTable() {
-    return table;
+  public ArrayList<ArrayList<Minion>> getBoard() {
+    return board;
   }
 
-  public void setTable(ArrayList<ArrayList<Minion>> table) {
-    this.table = table;
+  public void setBoard(ArrayList<ArrayList<Minion>> board) {
+    this.board = board;
   }
 }

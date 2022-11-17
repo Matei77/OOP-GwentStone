@@ -4,8 +4,13 @@ public final class Constants {
   private Constants() {}
   public static final int MAX_MANA_PER_ROUND = 10;
   public static final int ROWS_MAX_INDEX = 3;
+  public static final int MAX_CARDS_PER_ROW = 5;
   public static final int FRONT_ROW = 1;
   public static final int BACK_ROW = 2;
+  public static final int PLAYER_ONE_FRONT_ROW = 2;
+  public static final int PLAYER_ONE_BACK_ROW = 3;
+  public static final int PLAYER_TWO_FRONT_ROW = 1;
+  public static final int PLAYER_TWO_BACK_ROW = 0;
   public static final boolean TANK = true;
   public static final boolean NOT_TANK = false;
 

@@ -14,7 +14,13 @@ public class Player {
   private ArrayList<Card> cardsInHand;
   private Hero hero;
   private int mana = 0;
+  private int frontRowBoardIndex;
+  private int backRowBoardIndex;
 
+  public Player(int frontRowBoardIndex, int backRowBoardIndex) {
+    this.frontRowBoardIndex = frontRowBoardIndex;
+    this.backRowBoardIndex = backRowBoardIndex;
+  }
 
   public int getMana() {
     return mana;
@@ -72,5 +78,13 @@ public class Player {
 
   public void setDecksNr(int decksNr) {
     this.decksNr = decksNr;
+  }
+
+  public int getFrontRowBoardIndex() {
+    return frontRowBoardIndex;
+  }
+
+  public int getBackRowBoardIndex() {
+    return backRowBoardIndex;
   }
 }
