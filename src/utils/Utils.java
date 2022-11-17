@@ -34,31 +34,38 @@ public class Utils {
         switch(inputCard.getName()) {
           case SENTINEL:
           case BERSERKER:
+            card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(), inputCard.getHealth(),
+                inputCard.getDescription(), inputCard.getColors(), inputCard.getName(), BACK_ROW,
+                NOT_TANK);
+            break;
           case GOLIATH:
           case WARDEN:
             card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(), inputCard.getHealth(),
-                inputCard.getDescription(), inputCard.getColors(), inputCard.getName());
-            break;
+                inputCard.getDescription(), inputCard.getColors(), inputCard.getName(), FRONT_ROW
+                , TANK);
 
           case THE_RIPPER:
             card = new TheRipper(inputCard.getMana(), inputCard.getAttackDamage(),
                 inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
-                inputCard.getName());
+                inputCard.getName(), FRONT_ROW, NOT_TANK);
             break;
 
           case MIRAJ:
             card = new Miraj(inputCard.getMana(), inputCard.getAttackDamage(), inputCard.getHealth(),
-                inputCard.getDescription(), inputCard.getColors(), inputCard.getName());
+                inputCard.getDescription(), inputCard.getColors(), inputCard.getName(), FRONT_ROW
+                , NOT_TANK);
             break;
 
           case THE_CURSED_ONE:
             card = new TheCursedOne(inputCard.getMana(), inputCard.getAttackDamage(), inputCard.getHealth(),
-                inputCard.getDescription(), inputCard.getColors(), inputCard.getName());
+                inputCard.getDescription(), inputCard.getColors(), inputCard.getName(), BACK_ROW,
+                NOT_TANK);
             break;
 
           case DISCIPLE:
             card = new Disciple(inputCard.getMana(), inputCard.getAttackDamage(), inputCard.getHealth(),
-                inputCard.getDescription(), inputCard.getColors(), inputCard.getName());
+                inputCard.getDescription(), inputCard.getColors(), inputCard.getName(), BACK_ROW,
+                NOT_TANK);
             break;
 
           case FIRESTORM:

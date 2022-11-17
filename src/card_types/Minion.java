@@ -5,20 +5,19 @@ import java.util.ArrayList;
 public class Minion extends Card{
   private int health;
   private int attackDamage;
-  private boolean tank = false;
+  private int rowPlacement;
+  private boolean tank;
   private boolean frozen = false;
   private boolean actionAvailable = true;
 
 
   public Minion (int manaCost, int attackDamage, int health, String description,
-                 ArrayList<String> colors, String name) {
+                 ArrayList<String> colors, String name, int rowPlacement, boolean tank) {
     super(manaCost, description, colors, name);
     this.health = health;
     this.attackDamage = attackDamage;
-
-    if (name.equals("Warden") || name.equals("Goliath")) {
-      this.tank = true;
-    }
+    this.rowPlacement = rowPlacement;
+    this.tank = tank;
   }
 
   public void useAbility(Minion minion) {}
@@ -61,5 +60,13 @@ public class Minion extends Card{
 
   public void setActionAvailable(boolean actionAvailable) {
     this.actionAvailable = actionAvailable;
+  }
+
+  public int getRowPlacement() {
+    return rowPlacement;
+  }
+
+  public void setRowPlacement(int rowPlacement) {
+    this.rowPlacement = rowPlacement;
   }
 }
