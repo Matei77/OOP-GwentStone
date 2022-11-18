@@ -8,6 +8,7 @@ import card_types.environment_cards.HeartHound;
 import card_types.environment_cards.Winterfell;
 import fileio.CardInput;
 import fileio.DecksInput;
+import game_engine.GameEngine;
 import player.Deck;
 import player.Player;
 import card_types.heroes.EmpressThorina;
@@ -117,5 +118,18 @@ public class Utils {
         break;
     }
     player.setHero(playerHero);
+  }
+
+  public static void discardDeadMinions() {
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    for (ArrayList<Minion> row : board)
+      row.removeIf(minion -> minion.getHealth() <= 0);
+  }
+
+  public static Player getCurrentPlayer() {
+    if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN)
+      return GameEngine.getEngine().getPlayerOne();
+    else
+      return GameEngine.getEngine().getPlayerTwo();
   }
 }

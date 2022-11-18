@@ -19,7 +19,9 @@ abstract public class Card {
     this.name = name;
   }
 
-  public void placeCard(ActionsInput action, Player player) {}
+  public void placeCard() {}
+
+  public void useEnvironment() {}
 
   public int getHealth() {
     return -1;

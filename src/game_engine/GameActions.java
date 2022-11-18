@@ -1,20 +1,19 @@
 package game_engine;
 
 import card_types.Card;
-import card_types.Environment;
 import fileio.ActionsInput;
 import fileio.GameInput;
 import fileio.Input;
 import player.Player;
-import utils.ErrorHandler;
 import utils.Utils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static utils.Constants.*;
 
 public class GameActions {
+  private static ActionsInput currentAction;
+
   public static void preparePlayers() {
     Player playerOne = GameEngine.getEngine().getPlayerOne();
     Player playerTwo = GameEngine.getEngine().getPlayerTwo();
@@ -104,16 +103,10 @@ public class GameActions {
     }
   }
 
-  public static void placeCard(ActionsInput action) {
-    int handIndex = action.getHandIdx();
-    Player player;
-    int boardRow;
-    if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN)
-      player = GameEngine.getEngine().getPlayerOne();
-    else
-      player = GameEngine.getEngine().getPlayerTwo();
-
-    player.getCardsInHand().get(handIndex).placeCard(action, player);
+  public static void placeCard() {
+    int handIndex = currentAction.getHandIdx();
+    Player player = Utils.getCurrentPlayer();
+    player.getCardsInHand().get(handIndex).placeCard();
   }
 
   public static void cardUsesAttack() {
@@ -133,18 +126,21 @@ public class GameActions {
   }
 
   public static void useEnvironmentCard() {
-
+    int handIndex = currentAction.getHandIdx();
+    Player player = Utils.getCurrentPlayer();
+    player.getCardsInHand().get(handIndex).useEnvironment();
   }
 
   public static void executeActions(ArrayList<ActionsInput> actions) {
     for (ActionsInput action : actions) {
+      currentAction = action;
       String command = action.getCommand();
       switch (command) {
         case END_PLAYER_TURN:
           endPlayerTurn();
           break;
         case PLACE_CARD:
-          placeCard(action);
+          placeCard();
           break;
         case CARD_USES_ATTACK:
           cardUsesAttack();
@@ -162,10 +158,10 @@ public class GameActions {
           useEnvironmentCard();
           break;
         case GET_CARDS_IN_HAND:
-          Debug.getCardsInHand(action);
+          Debug.getCardsInHand();
           break;
         case GET_PLAYER_DECK:
-          Debug.getPlayerDeck(action);
+          Debug.getPlayerDeck();
           break;
         case GET_CARDS_ON_TABLE:
           Debug.getCardsOnTable();
@@ -174,17 +170,19 @@ public class GameActions {
           Debug.getPlayerTurn();
           break;
         case GET_PLAYER_HERO:
-          Debug.getPlayerHero(action);
+          Debug.getPlayerHero();
           break;
         case GET_CARD_AT_POSITION:
+          Debug.getCardAtPosition();
           break;
         case GET_PLAYER_MANA:
-          Debug.getPlayerMana(action);
+          Debug.getPlayerMana();
           break;
         case GET_ENVIRONMENT_CARDS_IN_HAND:
-          Debug.getEnvironmentCardsInHand(action);
+          Debug.getEnvironmentCardsInHand();
           break;
         case GET_FROZEN_CARDS_ON_TABLE:
+          Debug.getFrozenCardsOnTable();
           break;
         case GET_TOTAL_GAMES_PLAYED:
           break;
@@ -193,9 +191,14 @@ public class GameActions {
         case GET_PLAYER_TWO_WINS:
           break;
         default:
+          // ----------- !!! TODO delete this line at the end !!! -----------------
           System.out.println("Command not found");
           break;
       }
     }
+  }
+
+  public static ActionsInput getCurrentAction() {
+    return currentAction;
   }
 }

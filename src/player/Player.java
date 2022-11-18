@@ -14,8 +14,8 @@ public class Player {
   private ArrayList<Card> cardsInHand;
   private Hero hero;
   private int mana = 0;
-  private int frontRowBoardIndex;
-  private int backRowBoardIndex;
+  private final int frontRowBoardIndex;
+  private final int backRowBoardIndex;
 
   public Player(int frontRowBoardIndex, int backRowBoardIndex) {
     this.frontRowBoardIndex = frontRowBoardIndex;

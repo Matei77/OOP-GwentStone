@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.ActionsInput;
 import player.Deck;
 import player.Player;
+import utils.ErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,8 @@ import java.util.List;
 import static utils.Constants.*;
 
 public class Debug {
-  public static void getCardsInHand(ActionsInput action) {
-    int playerIdx = action.getPlayerIdx();
+  public static void getCardsInHand() {
+    int playerIdx = GameActions.getCurrentAction().getPlayerIdx();
     Player player = getPlayer(playerIdx);
 
     ObjectMapper mapper = new ObjectMapper();
@@ -39,8 +40,8 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getPlayerDeck(ActionsInput action) {
-    int playerIdx = action.getPlayerIdx();
+  public static void getPlayerDeck() {
+    int playerIdx = GameActions.getCurrentAction().getPlayerIdx();
     Player player = getPlayer(playerIdx);
 
     Deck playerCurrentDeck = player.getCurrentDeck();
@@ -69,7 +70,7 @@ public class Debug {
 
     for (ArrayList<Minion> row : board) {
       ArrayNode cards = mapper.createArrayNode();
-      for (Card card : row) {
+      for (Minion card : row) {
         ObjectNode cardObjectNode = createCardOutput(mapper, card);
         cards.add(cardObjectNode);
       }
@@ -95,9 +96,9 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getPlayerHero(ActionsInput action) {
+  public static void getPlayerHero() {
     // get the player's hero
-    int playerIdx = action.getPlayerIdx();
+    int playerIdx = GameActions.getCurrentAction().getPlayerIdx();
     Player player = getPlayer(playerIdx);
     Hero hero = player.getHero();
 
@@ -115,10 +116,33 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getCardAtPosition(ArrayList<ArrayList<Minion>> board) {}
+  public static void getCardAtPosition() {
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    ActionsInput action = GameActions.getCurrentAction();
+    int x = action.getX();
+    int y = action.getY();
 
-  public static void getPlayerMana(ActionsInput action) {
-    int playerIdx = action.getPlayerIdx();
+
+    ObjectMapper mapper = new ObjectMapper();
+
+    ObjectNode commandObjectNode = mapper.createObjectNode();
+    commandObjectNode.put("command", GET_CARD_AT_POSITION);
+    commandObjectNode.put("x", x);
+    commandObjectNode.put("y", y);
+
+    if (board.get(x).size() <= y) {
+      commandObjectNode.put("output", "No cards available at that position.");
+    } else {
+      ObjectNode card = createCardOutput(mapper, board.get(x).get(y));
+      commandObjectNode.set("output", card);
+    }
+
+    ArrayNode output = GameEngine.getEngine().getOutput();
+    output.addAll(List.of(commandObjectNode));
+  }
+
+  public static void getPlayerMana() {
+    int playerIdx = GameActions.getCurrentAction().getPlayerIdx();
     Player player = getPlayer(playerIdx);
 
     ObjectMapper mapper = new ObjectMapper();
@@ -131,8 +155,8 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getEnvironmentCardsInHand(ActionsInput action) {
-    int playerIdx = action.getPlayerIdx();
+  public static void getEnvironmentCardsInHand() {
+    int playerIdx = GameActions.getCurrentAction().getPlayerIdx();
     Player player = getPlayer(playerIdx);
 
     ObjectMapper mapper = new ObjectMapper();
@@ -155,13 +179,34 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getFrozenCardsOnTable(ArrayList<ArrayList<Card>> board) {}
+  public static void getFrozenCardsOnTable() {
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    ObjectMapper mapper = new ObjectMapper();
 
-  public static void getTotalGamesPlayed(GameEngine gameEngine) {}
+    ArrayNode cards = mapper.createArrayNode();
 
-  public static void getPlayerOneWins(Player player) {}
+    for (ArrayList<Minion> row : board) {
+      for (Minion card : row) {
+        if (card.isFrozen()) {
+          ObjectNode cardObjectNode = createCardOutput(mapper, card);
+          cards.add(cardObjectNode);
+        }
+      }
+    }
 
-  public static void getPlayerTwoWins(Player player) {}
+    ObjectNode commandObjectNode = mapper.createObjectNode();
+    commandObjectNode.put("command", GET_FROZEN_CARDS_ON_TABLE);
+    commandObjectNode.set("output", cards);
+
+    ArrayNode output = GameEngine.getEngine().getOutput();
+    output.addAll(List.of(commandObjectNode));
+  }
+
+  public static void getTotalGamesPlayed() {}
+
+  public static void getPlayerOneWins() {}
+
+  public static void getPlayerTwoWins() {}
 
   private static ObjectNode createCardOutput(ObjectMapper mapper, Card card) {
     ObjectNode outputObjectNode = mapper.createObjectNode();

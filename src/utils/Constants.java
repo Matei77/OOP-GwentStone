@@ -3,7 +3,7 @@ package utils;
 public final class Constants {
   private Constants() {}
   public static final int MAX_MANA_PER_ROUND = 10;
-  public static final int ROWS_MAX_INDEX = 3;
+  public static final int MAX_ROW_INDEX = 3;
   public static final int MAX_CARDS_PER_ROW = 5;
   public static final int FRONT_ROW = 1;
   public static final int BACK_ROW = 2;

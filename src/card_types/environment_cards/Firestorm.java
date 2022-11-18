@@ -2,6 +2,9 @@ package card_types.environment_cards;
 
 import card_types.Environment;
 import card_types.Minion;
+import game_engine.GameEngine;
+import player.Player;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -12,9 +15,13 @@ public class Firestorm extends Environment {
   }
 
   @Override
-  public void castEffect(ArrayList<Minion>[] board, int rowIndex) {
-    for (Minion minion : board[rowIndex]) {
+  public void castEffect(int affectedRow) {
+    for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
       minion.setHealth(minion.getHealth() - 1);
     }
+    Utils.discardDeadMinions();
+    Player player = Utils.getCurrentPlayer();
+    player.getCardsInHand().remove(this);
+    player.setMana(player.getMana() - this.getManaCost());
   }
 }

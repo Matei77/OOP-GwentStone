@@ -1,8 +1,10 @@
 package card_types;
 
 import fileio.ActionsInput;
+import game_engine.GameActions;
 import player.Player;
 import utils.ErrorHandler;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -12,9 +14,24 @@ public class Environment extends Card {
   }
 
   @Override
-  public void placeCard(ActionsInput action, Player player) {
-    ErrorHandler.ThrowError(action, "Cannot place environment card on table.");
+  public void placeCard() {
+    ErrorHandler.ThrowError("Cannot place environment card on table.");
   }
 
-  public void castEffect(ArrayList<Minion>[] Board, int rowIndex) {}
+  @Override
+  public void useEnvironment() {
+    Player player = Utils.getCurrentPlayer();
+    if (this.getManaCost() > player.getMana()) {
+      ErrorHandler.ThrowError("Not enough mana to use environment card.");
+      return;
+    }
+    int affectedRow = GameActions.getCurrentAction().getAffectedRow();
+    if (affectedRow == player.getFrontRowBoardIndex() || affectedRow == player.getBackRowBoardIndex()) {
+      ErrorHandler.ThrowError("Chosen row does not belong to the enemy.");
+      return;
+    }
+    this.castEffect(affectedRow);
+  }
+
+  public void castEffect(int affectedRow) {}
 }

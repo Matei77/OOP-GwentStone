@@ -31,14 +31,14 @@ public class GameEngine {
   private Player playerOne = new Player(PLAYER_ONE_FRONT_ROW, PLAYER_ONE_BACK_ROW);
   private Player playerTwo = new Player(PLAYER_TWO_FRONT_ROW, PLAYER_TWO_BACK_ROW);
 
-  private ArrayList<ArrayList<Minion>> board = new ArrayList<ArrayList<Minion>>(ROWS_MAX_INDEX + 1);
+  private ArrayList<ArrayList<Minion>> board;
 
 
   public void runEngine() {
-    prepareBoard();
     GameActions.preparePlayers();
     ArrayList<GameInput> games = inputData.getGames();
     for (GameInput game : games) {
+      prepareBoard();
       GameActions.startGame(game);
       GameActions.startRound();
       GameActions.executeActions(game.getActions());
@@ -47,6 +47,7 @@ public class GameEngine {
   }
 
   private void prepareBoard() {
+    ArrayList<ArrayList<Minion>> board = new ArrayList<ArrayList<Minion>>(MAX_ROW_INDEX + 1);
     ArrayList<Minion> row0 = new ArrayList<>(MAX_CARDS_PER_ROW);
     ArrayList<Minion> row1 = new ArrayList<>(MAX_CARDS_PER_ROW);
     ArrayList<Minion> row2 = new ArrayList<>(MAX_CARDS_PER_ROW);
@@ -55,6 +56,7 @@ public class GameEngine {
     board.add(row1);
     board.add(row2);
     board.add(row3);
+    GameEngine.getEngine().setBoard(board);
   }
 
 

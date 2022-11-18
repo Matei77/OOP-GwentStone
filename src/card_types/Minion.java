@@ -1,9 +1,11 @@
 package card_types;
 
 import fileio.ActionsInput;
+import game_engine.GameActions;
 import game_engine.GameEngine;
 import player.Player;
 import utils.ErrorHandler;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -28,25 +30,34 @@ public class Minion extends Card{
   }
 
   @Override
-  public void placeCard(ActionsInput action, Player player) {
+  public void placeCard() {
+    Player player = Utils.getCurrentPlayer();
     if (this.getManaCost() > player.getMana()) {
-      ErrorHandler.ThrowError(action, "Not enough mana to place card on table.");
-    } else {
-      int boardRowIndex = 0;
-      if (this.getRowPlacement() == FRONT_ROW)
-        boardRowIndex = player.getFrontRowBoardIndex();
-      else if (this.getRowPlacement() == BACK_ROW)
-        boardRowIndex = player.getBackRowBoardIndex();
-
-      ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
-      if (board.get(boardRowIndex).size() == MAX_CARDS_PER_ROW) {
-        ErrorHandler.ThrowError(action, "Cannot place card on table since row is full.");
-      } else {
-        board.get(boardRowIndex).add(this);
-        player.getCardsInHand().remove(this);
-        player.setMana(player.getMana() - this.getManaCost());
-      }
+      ErrorHandler.ThrowError("Not enough mana to place card on table.");
+      return;
     }
+
+    int boardRowIndex = 0;
+    if (this.getRowPlacement() == FRONT_ROW)
+      boardRowIndex = player.getFrontRowBoardIndex();
+    else if (this.getRowPlacement() == BACK_ROW)
+      boardRowIndex = player.getBackRowBoardIndex();
+
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+
+    if (board.get(boardRowIndex).size() == MAX_CARDS_PER_ROW) {
+      ErrorHandler.ThrowError("Cannot place card on table since row is full.");
+      return;
+    }
+
+    board.get(boardRowIndex).add(this);
+    player.getCardsInHand().remove(this);
+    player.setMana(player.getMana() - this.getManaCost());
+  }
+
+  @Override
+  public void useEnvironment() {
+    ErrorHandler.ThrowError("Chosen card is not of type environment.");
   }
 
   public void useAbility(Minion minion) {}
