@@ -44,6 +44,7 @@ public class Utils {
             card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(), inputCard.getHealth(),
                 inputCard.getDescription(), inputCard.getColors(), inputCard.getName(), FRONT_ROW
                 , TANK);
+            break;
 
           case THE_RIPPER:
             card = new TheRipper(inputCard.getMana(), inputCard.getAttackDamage(),
@@ -161,5 +162,17 @@ public class Utils {
 
     GameEngine.getEngine().getPlayerOne().getHero().setActionAvailable(ACTION_AVAILABLE);
     GameEngine.getEngine().getPlayerTwo().getHero().setActionAvailable(ACTION_AVAILABLE);
+  }
+
+  public static boolean enemyHasTank() {
+    Player player = GameEngine.getCurrentPlayer();
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    for (Minion minion : board.get(MAX_ROW_INDEX - player.getFrontRowBoardIndex())) {
+      if (minion.isTank())
+        return true;
+    }
+
+
+    return false;
   }
 }

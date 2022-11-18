@@ -1,8 +1,10 @@
 package card_types;
 
+import game_engine.GameActions;
 import game_engine.GameEngine;
 import player.Player;
 import utils.ErrorHandler;
+import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -55,6 +57,35 @@ public class Minion extends Card{
   @Override
   public void useEnvironment() {
     ErrorHandler.ThrowError("Chosen card is not of type environment.");
+  }
+
+  public void useAttack() {
+    int cardAttackedX = GameActions.getCurrentAction().getCardAttacked().getX();
+    int cardAttackedY = GameActions.getCurrentAction().getCardAttacked().getY();
+    Player player = GameEngine.getCurrentPlayer();
+    if (cardAttackedX == player.getFrontRowBoardIndex() || cardAttackedX == player.getBackRowBoardIndex()) {
+      ErrorHandler.ThrowError("Attacked card does not belong to the enemy.");
+      return;
+    }
+    if (!this.isActionAvailable()) {
+      ErrorHandler.ThrowError("Attacker card has already attacked this turn.");
+      return;
+    }
+    if (this.frozen) {
+      ErrorHandler.ThrowError("Attacker card is frozen.");
+      return;
+    }
+
+    Minion enemyMinion = GameEngine.getEngine().getBoard().get(cardAttackedX).get(cardAttackedY);
+    boolean enemyHasTank = Utils.enemyHasTank();
+
+    if (enemyHasTank && !enemyMinion.isTank()) {
+      ErrorHandler.ThrowError("Attacked card is not of type 'Tank'.");
+      return;
+    }
+
+    enemyMinion.setHealth(enemyMinion.getHealth() - this.getAttackDamage());
+    this.setActionAvailable(ACTION_NOT_AVAILABLE);
   }
 
   public void useAbility(Minion minion) {}

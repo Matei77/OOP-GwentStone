@@ -1,12 +1,14 @@
 package game_engine;
 
 import card_types.Card;
+import card_types.Minion;
 import fileio.ActionsInput;
 import fileio.GameInput;
 import fileio.Input;
 import player.Player;
 import utils.Utils;
 
+import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 
 import static utils.Constants.*;
@@ -98,7 +100,6 @@ public class GameActions {
       Utils.unfreezeFrozenMinions(GameEngine.getEngine().getPlayerTwo());
       GameEngine.getEngine().setPlayerTurn(PLAYER_ONE_TURN);
     }
-
     // start next round
     if (GameEngine.getEngine().getPlayerTurn() == GameEngine.getEngine().getStartingPlayer()) {
       startRound();
@@ -112,7 +113,11 @@ public class GameActions {
   }
 
   private static void cardUsesAttack() {
-
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    int cardAttackerX = currentAction.getCardAttacker().getX();
+    int cardAttackerY = currentAction.getCardAttacker().getY();
+    board.get(cardAttackerX).get(cardAttackerY).useAttack();
+    Utils.discardDeadMinions();
   }
 
   private static void cardUsesAbility() {

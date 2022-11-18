@@ -21,7 +21,7 @@ public class GameEngine {
   }
 
   private int currentGameNr = 0;
-  private int currentRoundNr = 0;
+  private int currentRoundNr;
   private int startingPlayer;
   private int playerTurn;
   private int shuffleSeed;
@@ -47,8 +47,8 @@ public class GameEngine {
 
   private void prepareNewGame() {
     prepareBoard();
-    playerOne.setMana(0);
-    playerTwo.setMana(0);
+    playerOne.setMana(INITIAL_PLAYER_MANA);
+    playerTwo.setMana(INITIAL_PLAYER_MANA);
     currentRoundNr = 0;
   }
 

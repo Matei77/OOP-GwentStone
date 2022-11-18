@@ -27,8 +27,19 @@ public class ErrorHandler {
       case USE_ENVIRONMENT_CARD:
         errorObjectNode.put("handIdx", action.getHandIdx());
         errorObjectNode.put("affectedRow", action.getAffectedRow());
+        break;
       case USE_HERO_ABILITY:
         errorObjectNode.put("affectedRow", action.getAffectedRow());
+        break;
+      case CARD_USES_ATTACK:
+        ObjectNode cardAttacker = mapper.createObjectNode();
+        cardAttacker.put("x", action.getCardAttacker().getX());
+        cardAttacker.put("y", action.getCardAttacker().getY());
+        ObjectNode cardAttacked = mapper.createObjectNode();
+        cardAttacked.put("x", action.getCardAttacked().getX());
+        cardAttacked.put("y", action.getCardAttacked().getY());
+        errorObjectNode.set("cardAttacker", cardAttacker);
+        errorObjectNode.set("cardAttacked", cardAttacked);
     }
     errorObjectNode.put("error", message);
 

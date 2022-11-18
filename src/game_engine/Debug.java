@@ -131,7 +131,7 @@ public class Debug {
     commandObjectNode.put("y", y);
 
     if (board.get(x).size() <= y) {
-      commandObjectNode.put("output", "No cards available at that position.");
+      commandObjectNode.put("output", "No card available at that position.");
     } else {
       ObjectNode card = createCardOutput(mapper, board.get(x).get(y));
       commandObjectNode.set("output", card);
