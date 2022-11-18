@@ -85,15 +85,17 @@ public class GameActions {
     playerTwo.setMana(playerTwo.getMana() + Math.min(currentRoundNr, MAX_MANA_PER_ROUND));
 
     // TODO reset all cards attacked status
-
+    Utils.resetActionAvailableStatus();
   }
 
   public static void endPlayerTurn() {
     if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN) {
       // TODO unfreeze frozen minions for player1
+      Utils.unfreezeFrozenMinions(GameEngine.getEngine().getPlayerOne());
       GameEngine.getEngine().setPlayerTurn(PLAYER_TWO_TURN);
     } else {
       // TODO unfreeze frozen minions for player2
+      Utils.unfreezeFrozenMinions(GameEngine.getEngine().getPlayerTwo());
       GameEngine.getEngine().setPlayerTurn(PLAYER_ONE_TURN);
     }
 
@@ -105,7 +107,7 @@ public class GameActions {
 
   public static void placeCard() {
     int handIndex = currentAction.getHandIdx();
-    Player player = Utils.getCurrentPlayer();
+    Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().get(handIndex).placeCard();
   }
 
@@ -122,12 +124,13 @@ public class GameActions {
   }
 
   public static void useHeroAbility() {
-
+    Player player = GameEngine.getCurrentPlayer();
+    player.getHero().useHeroAbility();
   }
 
   public static void useEnvironmentCard() {
     int handIndex = currentAction.getHandIdx();
-    Player player = Utils.getCurrentPlayer();
+    Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().get(handIndex).useEnvironment();
   }
 

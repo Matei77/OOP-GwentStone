@@ -27,21 +27,12 @@ public class HeartHound extends Environment {
       return;
     }
 
-    Minion highestHealthMinion = getHighestHealthMinionOnRow(affectedRow);
+    Minion highestHealthMinion = Utils.getHighestHealthMinionOnRow(affectedRow);
     board.get(MAX_ROW_INDEX - affectedRow).add(highestHealthMinion);
     board.get(affectedRow).remove(highestHealthMinion);
 
-    Player player = Utils.getCurrentPlayer();
+    Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().remove(this);
     player.setMana(player.getMana() - this.getManaCost());
-  }
-
-  private Minion getHighestHealthMinionOnRow(int affectedRow) {
-    Minion highestHealthMinion = GameEngine.getEngine().getBoard().get(affectedRow).get(0);
-    for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
-      if (minion.getHealth() > highestHealthMinion.getHealth())
-        highestHealthMinion = minion;
-    }
-    return highestHealthMinion;
   }
 }

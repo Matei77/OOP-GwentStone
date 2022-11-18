@@ -14,6 +14,12 @@ public final class Constants {
   public static final boolean TANK = true;
   public static final boolean NOT_TANK = false;
 
+  public static final boolean FROZEN = true;
+  public static final boolean NOT_FROZEN = false;
+
+  public static final boolean ACTION_AVAILABLE = true;
+  public static final boolean ACTION_NOT_AVAILABLE = false;
+
   public static final int PLAYER_ONE_TURN = 1;
   public static final int PLAYER_TWO_TURN = 2;
 

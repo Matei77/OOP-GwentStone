@@ -2,8 +2,16 @@ package card_types.heroes;
 
 import card_types.Hero;
 import card_types.Minion;
+import game_engine.GameActions;
+import game_engine.GameEngine;
+import player.Player;
+import utils.ErrorHandler;
+import utils.Utils;
 
 import java.util.ArrayList;
+
+import static utils.Constants.ACTION_NOT_AVAILABLE;
+import static utils.Constants.FROZEN;
 
 public class LordRoyce extends Hero {
 
@@ -11,10 +19,21 @@ public class LordRoyce extends Hero {
     super(manaCost, description, colors, name);
   }
 
+
   @Override
-  public void useAbility(ArrayList<Minion> row) {
-    for (Minion minion : row) {
-      minion.setHealth(minion.getHealth() + 1);
+  public void castEffect() {
+    int affectedRow = GameActions.getCurrentAction().getAffectedRow();
+
+    if (affectedRow == GameEngine.getCurrentPlayer().getFrontRowBoardIndex() || affectedRow == GameEngine.getCurrentPlayer().getBackRowBoardIndex()) {
+      ErrorHandler.ThrowError("Selected row does not belong to the enemy.");
+      return;
     }
+
+    Minion highestAttackMinion = Utils.getHighestAttackMinionOnRow(affectedRow);
+    highestAttackMinion.setFrozen(FROZEN);
+
+    Player player = GameEngine.getCurrentPlayer();
+    player.setMana(player.getMana() - this.getManaCost());
+    this.setActionAvailable(ACTION_NOT_AVAILABLE);
   }
 }

@@ -20,7 +20,7 @@ public class Firestorm extends Environment {
       minion.setHealth(minion.getHealth() - 1);
     }
     Utils.discardDeadMinions();
-    Player player = Utils.getCurrentPlayer();
+    Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().remove(this);
     player.setMana(player.getMana() - this.getManaCost());
   }

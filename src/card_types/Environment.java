@@ -1,10 +1,9 @@
 package card_types;
 
-import fileio.ActionsInput;
 import game_engine.GameActions;
+import game_engine.GameEngine;
 import player.Player;
 import utils.ErrorHandler;
-import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,7 @@ public class Environment extends Card {
 
   @Override
   public void useEnvironment() {
-    Player player = Utils.getCurrentPlayer();
+    Player player = GameEngine.getCurrentPlayer();
     if (this.getManaCost() > player.getMana()) {
       ErrorHandler.ThrowError("Not enough mana to use environment card.");
       return;

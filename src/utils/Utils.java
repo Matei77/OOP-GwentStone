@@ -126,10 +126,40 @@ public class Utils {
       row.removeIf(minion -> minion.getHealth() <= 0);
   }
 
-  public static Player getCurrentPlayer() {
-    if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN)
-      return GameEngine.getEngine().getPlayerOne();
-    else
-      return GameEngine.getEngine().getPlayerTwo();
+  public static Minion getHighestHealthMinionOnRow(int affectedRow) {
+    Minion highestHealthMinion = GameEngine.getEngine().getBoard().get(affectedRow).get(0);
+    for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
+      if (minion.getHealth() > highestHealthMinion.getHealth())
+        highestHealthMinion = minion;
+    }
+    return highestHealthMinion;
+  }
+
+  public static Minion getHighestAttackMinionOnRow(int affectedRow) {
+    Minion highestAttackMinion = GameEngine.getEngine().getBoard().get(affectedRow).get(0);
+    for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
+      if (minion.getHealth() > highestAttackMinion.getHealth())
+        highestAttackMinion = minion;
+    }
+    return highestAttackMinion;
+  }
+
+  public static void unfreezeFrozenMinions(Player player) {
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    for (Minion minion : board.get(player.getFrontRowBoardIndex())) {
+      minion.setFrozen(NOT_FROZEN);
+    }
+    for (Minion minion: board.get(player.getBackRowBoardIndex())) {
+      minion.setFrozen(NOT_FROZEN);
+    }
+  }
+  public static void resetActionAvailableStatus() {
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    for (ArrayList<Minion> row : board)
+      for (Minion minion : row)
+        minion.setActionAvailable(ACTION_AVAILABLE);
+
+    GameEngine.getEngine().getPlayerOne().getHero().setActionAvailable(ACTION_AVAILABLE);
+    GameEngine.getEngine().getPlayerTwo().getHero().setActionAvailable(ACTION_AVAILABLE);
   }
 }

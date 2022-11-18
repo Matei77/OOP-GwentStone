@@ -33,7 +33,6 @@ public class GameEngine {
 
   private ArrayList<ArrayList<Minion>> board;
 
-
   public void runEngine() {
     GameActions.preparePlayers();
     ArrayList<GameInput> games = inputData.getGames();
@@ -59,6 +58,12 @@ public class GameEngine {
     GameEngine.getEngine().setBoard(board);
   }
 
+  public static Player getCurrentPlayer() {
+    if (getEngine().getPlayerTurn() == PLAYER_ONE_TURN)
+      return getEngine().getPlayerOne();
+    else
+      return getEngine().getPlayerTwo();
+  }
 
   public int getCurrentGameNr() {
     return currentGameNr;

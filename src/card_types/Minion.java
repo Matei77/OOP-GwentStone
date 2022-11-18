@@ -1,11 +1,8 @@
 package card_types;
 
-import fileio.ActionsInput;
-import game_engine.GameActions;
 import game_engine.GameEngine;
 import player.Player;
 import utils.ErrorHandler;
-import utils.Utils;
 
 import java.util.ArrayList;
 
@@ -31,7 +28,7 @@ public class Minion extends Card{
 
   @Override
   public void placeCard() {
-    Player player = Utils.getCurrentPlayer();
+    Player player = GameEngine.getCurrentPlayer();
     if (this.getManaCost() > player.getMana()) {
       ErrorHandler.ThrowError("Not enough mana to place card on table.");
       return;
