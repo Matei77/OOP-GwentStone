@@ -88,7 +88,7 @@ public class GameActions {
     Utils.resetActionAvailableStatus();
   }
 
-  public static void endPlayerTurn() {
+  private static void endPlayerTurn() {
     if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN) {
       // TODO unfreeze frozen minions for player1
       Utils.unfreezeFrozenMinions(GameEngine.getEngine().getPlayerOne());
@@ -105,30 +105,30 @@ public class GameActions {
     }
   }
 
-  public static void placeCard() {
+  private static void placeCard() {
     int handIndex = currentAction.getHandIdx();
     Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().get(handIndex).placeCard();
   }
 
-  public static void cardUsesAttack() {
+  private static void cardUsesAttack() {
 
   }
 
-  public static void cardUsesAbility() {
+  private static void cardUsesAbility() {
 
   }
 
-  public static void useAttackHero() {
+  private static void useAttackHero() {
 
   }
 
-  public static void useHeroAbility() {
+  private static void useHeroAbility() {
     Player player = GameEngine.getCurrentPlayer();
     player.getHero().useHeroAbility();
   }
 
-  public static void useEnvironmentCard() {
+  private static void useEnvironmentCard() {
     int handIndex = currentAction.getHandIdx();
     Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().get(handIndex).useEnvironment();

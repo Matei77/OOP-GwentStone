@@ -37,12 +37,19 @@ public class GameEngine {
     GameActions.preparePlayers();
     ArrayList<GameInput> games = inputData.getGames();
     for (GameInput game : games) {
-      prepareBoard();
+      prepareNewGame();
       GameActions.startGame(game);
       GameActions.startRound();
       GameActions.executeActions(game.getActions());
       currentGameNr++;
     }
+  }
+
+  private void prepareNewGame() {
+    prepareBoard();
+    playerOne.setMana(0);
+    playerTwo.setMana(0);
+    currentRoundNr = 0;
   }
 
   private void prepareBoard() {
