@@ -121,7 +121,11 @@ public class GameActions {
   }
 
   private static void cardUsesAbility() {
-
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    int cardAttackerX = currentAction.getCardAttacker().getX();
+    int cardAttackerY = currentAction.getCardAttacker().getY();
+    board.get(cardAttackerX).get(cardAttackerY).useAbility();
+    Utils.discardDeadMinions();
   }
 
   private static void useAttackHero() {

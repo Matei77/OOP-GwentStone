@@ -32,6 +32,7 @@ public class ErrorHandler {
         errorObjectNode.put("affectedRow", action.getAffectedRow());
         break;
       case CARD_USES_ATTACK:
+      case CARD_USES_ABILITY:
         ObjectNode cardAttacker = mapper.createObjectNode();
         cardAttacker.put("x", action.getCardAttacker().getX());
         cardAttacker.put("y", action.getCardAttacker().getY());
@@ -40,6 +41,7 @@ public class ErrorHandler {
         cardAttacked.put("y", action.getCardAttacked().getY());
         errorObjectNode.set("cardAttacker", cardAttacker);
         errorObjectNode.set("cardAttacked", cardAttacked);
+        break;
     }
     errorObjectNode.put("error", message);
 

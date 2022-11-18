@@ -77,9 +77,8 @@ public class Minion extends Card{
     }
 
     Minion enemyMinion = GameEngine.getEngine().getBoard().get(cardAttackedX).get(cardAttackedY);
-    boolean enemyHasTank = Utils.enemyHasTank();
 
-    if (enemyHasTank && !enemyMinion.isTank()) {
+    if (Utils.enemyHasTank() && !enemyMinion.isTank()) {
       ErrorHandler.ThrowError("Attacked card is not of type 'Tank'.");
       return;
     }
@@ -88,7 +87,21 @@ public class Minion extends Card{
     this.setActionAvailable(ACTION_NOT_AVAILABLE);
   }
 
-  public void useAbility(Minion minion) {}
+  public void useAbility() {
+    if (this.frozen) {
+      ErrorHandler.ThrowError("Attacker card is frozen.");
+      return;
+    }
+
+    if (!this.isActionAvailable()) {
+      ErrorHandler.ThrowError("Attacker card has already attacked this turn.");
+      return;
+    }
+
+    this.castAbility();
+  }
+
+  public void castAbility() {}
 
   public int getHealth() {
     return health;

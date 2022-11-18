@@ -2,6 +2,13 @@ package card_types.special_minions;
 
 import java.util.ArrayList;
 import card_types.Minion;
+import game_engine.GameActions;
+import game_engine.GameEngine;
+import player.Player;
+import utils.ErrorHandler;
+import utils.Utils;
+
+import static utils.Constants.ACTION_NOT_AVAILABLE;
 
 public class TheRipper extends Minion {
   public TheRipper(int manaCost, int attackDamage, int health, String description,
@@ -11,7 +18,24 @@ public class TheRipper extends Minion {
 
   // only on enemy minion
   @Override
-  public void useAbility(Minion minion) {
-    minion.setAttackDamage(minion.getAttackDamage() - 2);
+  public void castAbility() {
+    int cardAttackedX = GameActions.getCurrentAction().getCardAttacked().getX();
+    int cardAttackedY = GameActions.getCurrentAction().getCardAttacked().getY();
+    Player player = GameEngine.getCurrentPlayer();
+
+    if (cardAttackedX == player.getFrontRowBoardIndex() || cardAttackedX == player.getBackRowBoardIndex()) {
+      ErrorHandler.ThrowError("Attacked card does not belong to the enemy.");
+      return;
+    }
+
+    Minion enemyMinion = GameEngine.getEngine().getBoard().get(cardAttackedX).get(cardAttackedY);
+
+    if (Utils.enemyHasTank() && !enemyMinion.isTank()) {
+      ErrorHandler.ThrowError("Attacked card is not of type 'Tank'.");
+      return;
+    }
+
+    enemyMinion.setAttackDamage(Math.max(enemyMinion.getAttackDamage() - 2, 0));
+    this.setActionAvailable(ACTION_NOT_AVAILABLE);
   }
 }

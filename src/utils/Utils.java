@@ -171,8 +171,6 @@ public class Utils {
       if (minion.isTank())
         return true;
     }
-
-
     return false;
   }
 }
