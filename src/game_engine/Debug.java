@@ -202,11 +202,35 @@ public class Debug {
     output.addAll(List.of(commandObjectNode));
   }
 
-  public static void getTotalGamesPlayed() {}
+  public static void getTotalGamesPlayed() {
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode commandObjectNode = mapper.createObjectNode();
+    commandObjectNode.put("command", GET_TOTAL_GAMES_PLAYED);
+    commandObjectNode.put("output", GameEngine.getEngine().getPlayerOneWins() + GameEngine.getEngine().getPlayerTwoWins());
 
-  public static void getPlayerOneWins() {}
+    ArrayNode output = GameEngine.getEngine().getOutput();
+    output.addAll(List.of(commandObjectNode));
+  }
 
-  public static void getPlayerTwoWins() {}
+  public static void getPlayerOneWins() {
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode commandObjectNode = mapper.createObjectNode();
+    commandObjectNode.put("command", GET_PLAYER_ONE_WINS);
+    commandObjectNode.put("output", GameEngine.getEngine().getPlayerOneWins());
+
+    ArrayNode output = GameEngine.getEngine().getOutput();
+    output.addAll(List.of(commandObjectNode));
+  }
+
+  public static void getPlayerTwoWins() {
+    ObjectMapper mapper = new ObjectMapper();
+    ObjectNode commandObjectNode = mapper.createObjectNode();
+    commandObjectNode.put("command", GET_PLAYER_TWO_WINS);
+    commandObjectNode.put("output", GameEngine.getEngine().getPlayerTwoWins());
+
+    ArrayNode output = GameEngine.getEngine().getOutput();
+    output.addAll(List.of(commandObjectNode));
+  }
 
   private static ObjectNode createCardOutput(ObjectMapper mapper, Card card) {
     ObjectNode outputObjectNode = mapper.createObjectNode();

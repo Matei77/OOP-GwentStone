@@ -8,7 +8,6 @@ import fileio.Input;
 import player.Player;
 import utils.Utils;
 
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 
 import static utils.Constants.*;
@@ -23,6 +22,9 @@ public class GameActions {
 
     Utils.setPlayerDecksData(playerOne, inputData.getPlayerOneDecks());
     Utils.setPlayerDecksData(playerTwo, inputData.getPlayerTwoDecks());
+
+    GameEngine.getEngine().setPlayerOneWins(0);
+    GameEngine.getEngine().setPlayerTwoWins(0);
   }
 
   public static void startGame(GameInput game) {
@@ -56,9 +58,9 @@ public class GameActions {
     GameEngine.getEngine().setPlayerTurn(startingPlayer);
 
     // reset card in hand
-    ArrayList<Card> cardsInHand = new ArrayList<Card>();
+    ArrayList<Card> cardsInHand = new ArrayList<>();
     playerOne.setCardsInHand(cardsInHand);
-    cardsInHand = new ArrayList<Card>();
+    cardsInHand = new ArrayList<>();
     playerTwo.setCardsInHand(cardsInHand);
   }
 
@@ -69,7 +71,7 @@ public class GameActions {
     GameEngine.getEngine().setCurrentRoundNr(currentRoundNr);
 
     // update hand and deck
-    ArrayList<Card> hand = null;
+    ArrayList<Card> hand;
     if (!playerOne.getCurrentDeck().getCards().isEmpty()) {
       hand = playerOne.getCardsInHand();
       hand.add(playerOne.getCurrentDeck().getCards().get(0));
@@ -129,7 +131,10 @@ public class GameActions {
   }
 
   private static void useAttackHero() {
-
+    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
+    int cardAttackerX = currentAction.getCardAttacker().getX();
+    int cardAttackerY = currentAction.getCardAttacker().getY();
+    board.get(cardAttackerX).get(cardAttackerY).attackHero();
   }
 
   private static void useHeroAbility() {
@@ -147,66 +152,67 @@ public class GameActions {
     for (ActionsInput action : actions) {
       currentAction = action;
       String command = action.getCommand();
-      switch (command) {
-        case END_PLAYER_TURN:
-          endPlayerTurn();
-          break;
-        case PLACE_CARD:
-          placeCard();
-          break;
-        case CARD_USES_ATTACK:
-          cardUsesAttack();
-          break;
-        case CARD_USES_ABILITY:
-          cardUsesAbility();
-          break;
-        case USE_ATTACK_HERO:
-          useAttackHero();
-          break;
-        case USE_HERO_ABILITY:
-          useHeroAbility();
-          break;
-        case USE_ENVIRONMENT_CARD:
-          useEnvironmentCard();
-          break;
-        case GET_CARDS_IN_HAND:
-          Debug.getCardsInHand();
-          break;
-        case GET_PLAYER_DECK:
-          Debug.getPlayerDeck();
-          break;
-        case GET_CARDS_ON_TABLE:
-          Debug.getCardsOnTable();
-          break;
-        case GET_PLAYER_TURN:
-          Debug.getPlayerTurn();
-          break;
-        case GET_PLAYER_HERO:
-          Debug.getPlayerHero();
-          break;
-        case GET_CARD_AT_POSITION:
-          Debug.getCardAtPosition();
-          break;
-        case GET_PLAYER_MANA:
-          Debug.getPlayerMana();
-          break;
-        case GET_ENVIRONMENT_CARDS_IN_HAND:
-          Debug.getEnvironmentCardsInHand();
-          break;
-        case GET_FROZEN_CARDS_ON_TABLE:
-          Debug.getFrozenCardsOnTable();
-          break;
-        case GET_TOTAL_GAMES_PLAYED:
-          break;
-        case GET_PLAYER_ONE_WINS:
-          break;
-        case GET_PLAYER_TWO_WINS:
-          break;
-        default:
-          // ----------- !!! TODO delete this line at the end !!! -----------------
-          System.out.println("Command not found");
-          break;
-      }
+        switch (command) {
+          case END_PLAYER_TURN:
+            endPlayerTurn();
+            break;
+          case PLACE_CARD:
+            placeCard();
+            break;
+          case CARD_USES_ATTACK:
+            cardUsesAttack();
+            break;
+          case CARD_USES_ABILITY:
+            cardUsesAbility();
+            break;
+          case USE_ATTACK_HERO:
+            useAttackHero();
+            break;
+          case USE_HERO_ABILITY:
+            useHeroAbility();
+            break;
+          case USE_ENVIRONMENT_CARD:
+            useEnvironmentCard();
+            break;
+          case GET_CARDS_IN_HAND:
+            Debug.getCardsInHand();
+            break;
+          case GET_PLAYER_DECK:
+            Debug.getPlayerDeck();
+            break;
+          case GET_CARDS_ON_TABLE:
+            Debug.getCardsOnTable();
+            break;
+          case GET_PLAYER_TURN:
+            Debug.getPlayerTurn();
+            break;
+          case GET_PLAYER_HERO:
+            Debug.getPlayerHero();
+            break;
+          case GET_CARD_AT_POSITION:
+            Debug.getCardAtPosition();
+            break;
+          case GET_PLAYER_MANA:
+            Debug.getPlayerMana();
+            break;
+          case GET_ENVIRONMENT_CARDS_IN_HAND:
+            Debug.getEnvironmentCardsInHand();
+            break;
+          case GET_FROZEN_CARDS_ON_TABLE:
+            Debug.getFrozenCardsOnTable();
+            break;
+          case GET_TOTAL_GAMES_PLAYED:
+            Debug.getTotalGamesPlayed();
+            break;
+          case GET_PLAYER_ONE_WINS:
+            Debug.getPlayerOneWins();
+            break;
+          case GET_PLAYER_TWO_WINS:
+            Debug.getPlayerTwoWins();
+            break;
+          default:
+            break;
+        }
     }
   }
 

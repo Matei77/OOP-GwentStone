@@ -42,6 +42,12 @@ public class ErrorHandler {
         errorObjectNode.set("cardAttacker", cardAttacker);
         errorObjectNode.set("cardAttacked", cardAttacked);
         break;
+      case USE_ATTACK_HERO:
+        cardAttacker = mapper.createObjectNode();
+        cardAttacker.put("x", action.getCardAttacker().getX());
+        cardAttacker.put("y", action.getCardAttacker().getY());
+        errorObjectNode.set("cardAttacker", cardAttacker);
+        break;
     }
     errorObjectNode.put("error", message);
 

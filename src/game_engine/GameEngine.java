@@ -20,10 +20,13 @@ public class GameEngine {
     return instance;
   }
 
+  private boolean gameEnded;
   private int currentGameNr = 0;
   private int currentRoundNr;
   private int startingPlayer;
   private int playerTurn;
+  private int playerOneWins;
+  private int playerTwoWins;
   private int shuffleSeed;
   private Input inputData;
   private ArrayNode output;
@@ -46,6 +49,7 @@ public class GameEngine {
   }
 
   private void prepareNewGame() {
+    gameEnded = false;
     prepareBoard();
     playerOne.setMana(INITIAL_PLAYER_MANA);
     playerTwo.setMana(INITIAL_PLAYER_MANA);
@@ -150,5 +154,29 @@ public class GameEngine {
 
   public void setBoard(ArrayList<ArrayList<Minion>> board) {
     this.board = board;
+  }
+
+  public boolean isGameEnded() {
+    return gameEnded;
+  }
+
+  public void setGameEnded(boolean gameEnded) {
+    this.gameEnded = gameEnded;
+  }
+
+  public int getPlayerOneWins() {
+    return playerOneWins;
+  }
+
+  public void setPlayerOneWins(int playerOneWins) {
+    this.playerOneWins = playerOneWins;
+  }
+
+  public int getPlayerTwoWins() {
+    return playerTwoWins;
+  }
+
+  public void setPlayerTwoWins(int playerTwoWins) {
+    this.playerTwoWins = playerTwoWins;
   }
 }

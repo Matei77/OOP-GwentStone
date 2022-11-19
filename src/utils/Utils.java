@@ -139,7 +139,7 @@ public class Utils {
   public static Minion getHighestAttackMinionOnRow(int affectedRow) {
     Minion highestAttackMinion = GameEngine.getEngine().getBoard().get(affectedRow).get(0);
     for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
-      if (minion.getHealth() > highestAttackMinion.getHealth())
+      if (minion.getAttackDamage() > highestAttackMinion.getAttackDamage())
         highestAttackMinion = minion;
     }
     return highestAttackMinion;
