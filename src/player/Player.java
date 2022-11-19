@@ -1,36 +1,29 @@
 package player;
 
-import card_types.Card;
-import card_types.Hero;
+import cardtypes.Card;
+import cardtypes.Hero;
 
 import java.util.ArrayList;
 
-public class Player {
+public final class Player {
   private ArrayList<Deck> decks;
-  private int decksNr;
-  private int nrCardsInDeck;
-
   private Deck currentDeck;
   private ArrayList<Card> cardsInHand;
   private Hero hero;
-  private int mana = 0;
+  private int mana;
   private final int frontRowBoardIndex;
   private final int backRowBoardIndex;
 
-  public Player(int frontRowBoardIndex, int backRowBoardIndex) {
+  public Player(final int frontRowBoardIndex, final int backRowBoardIndex) {
     this.frontRowBoardIndex = frontRowBoardIndex;
     this.backRowBoardIndex = backRowBoardIndex;
   }
 
-  public int getMana() {
-    return mana;
-  }
-
-  public void setMana(int mana) {
-    this.mana = mana;
-  }
-
-  public void setCurrentDeck(int chosenDeckIndex) {
+  /**
+   * Set the currentDeck to be a copy of the deck at the chosen index.
+   * @param chosenDeckIndex the index of the wanted deck from the array of decks
+   */
+  public void setCurrentDeck(final int chosenDeckIndex) {
     currentDeck = new Deck();
     ArrayList<Card> deckCopy = new ArrayList<>();
 
@@ -41,6 +34,14 @@ public class Player {
     currentDeck.setCards(deckCopy);
   }
 
+  public int getMana() {
+    return mana;
+  }
+
+  public void setMana(final int mana) {
+    this.mana = mana;
+  }
+
   public Deck getCurrentDeck() {
     return currentDeck;
   }
@@ -49,7 +50,7 @@ public class Player {
     return cardsInHand;
   }
 
-  public void setCardsInHand(ArrayList<Card> cardsInHand) {
+  public void setCardsInHand(final ArrayList<Card> cardsInHand) {
     this.cardsInHand = cardsInHand;
   }
 
@@ -57,32 +58,16 @@ public class Player {
     return hero;
   }
 
-  public void setHero(Hero hero) {
+  public void setHero(final Hero hero) {
     this.hero = hero;
-  }
-
-  public int getNrCardsInDeck() {
-    return nrCardsInDeck;
-  }
-
-  public void setNrCardsInDeck(int nrCardsInDeck) {
-    this.nrCardsInDeck = nrCardsInDeck;
   }
 
   public ArrayList<Deck> getDecks() {
     return decks;
   }
 
-  public void setDecks(ArrayList<Deck> decks) {
+  public void setDecks(final ArrayList<Deck> decks) {
     this.decks = decks;
-  }
-
-  public int getDecksNr() {
-    return decksNr;
-  }
-
-  public void setDecksNr(int decksNr) {
-    this.decksNr = decksNr;
   }
 
   public int getFrontRowBoardIndex() {

@@ -1,17 +1,27 @@
 package utils;
 
 public final class Constants {
-  private Constants() {}
+  private Constants() { }
+  public static final int HERO_STARTING_HEALTH = 30;
   public static final int MAX_MANA_PER_ROUND = 10;
   public static final int INITIAL_PLAYER_MANA = 0;
+  public static final int INITIAL_PLAYER_WINS = 0;
+  public static final int INITIAL_ROUND_NUMBER = 0;
+
   public static final int MAX_ROW_INDEX = 3;
   public static final int MAX_CARDS_PER_ROW = 5;
+
   public static final int FRONT_ROW = 1;
   public static final int BACK_ROW = 2;
+
   public static final int PLAYER_ONE_FRONT_ROW = 2;
   public static final int PLAYER_ONE_BACK_ROW = 3;
   public static final int PLAYER_TWO_FRONT_ROW = 1;
   public static final int PLAYER_TWO_BACK_ROW = 0;
+
+  public static final int PLAYER_ONE_TURN = 1;
+  public static final int PLAYER_TWO_TURN = 2;
+
   public static final boolean TANK = true;
   public static final boolean NOT_TANK = false;
 
@@ -21,12 +31,7 @@ public final class Constants {
   public static final boolean ACTION_AVAILABLE = true;
   public static final boolean ACTION_NOT_AVAILABLE = false;
 
-  public static final int PLAYER_ONE_TURN = 1;
-  public static final int PLAYER_TWO_TURN = 2;
 
-  public static final String MINION = "Minion";
-  public static final String ENVIRONMENT = "Environment";
-  public static final String HERO = "Hero";
   public static final String SENTINEL = "Sentinel";
   public static final String BERSERKER = "Berserker";
   public static final String GOLIATH = "Goliath";
