@@ -82,64 +82,70 @@ public final class Utils {
       // create the list of cards for each deck
       ArrayList<Card> listOfCards = new ArrayList<>();
       for (CardInput inputCard : inputDeck) {
-        Card card = null;
         // construct each card based on its type
         switch (inputCard.getName()) {
-          case SENTINEL, BERSERKER:
-            card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(),
+          case SENTINEL, BERSERKER -> {
+            Card card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(),
                 inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
                 inputCard.getName(), BACK_ROW, NOT_TANK);
-            break;
+            listOfCards.add(card);
+          }
 
-          case GOLIATH, WARDEN:
-            card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(),
+          case GOLIATH, WARDEN -> {
+            Card card = new Minion(inputCard.getMana(), inputCard.getAttackDamage(),
                 inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
                 inputCard.getName(), FRONT_ROW, TANK);
-            break;
+            listOfCards.add(card);
+          }
 
-          case THE_RIPPER:
-            card = new TheRipper(inputCard.getMana(), inputCard.getAttackDamage(),
+          case THE_RIPPER -> {
+            Card card = new TheRipper(inputCard.getMana(), inputCard.getAttackDamage(),
                 inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
                 inputCard.getName(), FRONT_ROW, NOT_TANK);
-            break;
+            listOfCards.add(card);
+          }
 
-          case MIRAJ:
-            card = new Miraj(inputCard.getMana(), inputCard.getAttackDamage(),
+          case MIRAJ -> {
+            Card card = new Miraj(inputCard.getMana(), inputCard.getAttackDamage(),
                 inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
                 inputCard.getName(), FRONT_ROW, NOT_TANK);
-            break;
+            listOfCards.add(card);
+          }
 
-          case THE_CURSED_ONE:
-            card = new TheCursedOne(inputCard.getMana(), inputCard.getAttackDamage(),
+          case THE_CURSED_ONE -> {
+            Card card = new TheCursedOne(inputCard.getMana(), inputCard.getAttackDamage(),
+                    inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
+                    inputCard.getName(), BACK_ROW, NOT_TANK);
+            listOfCards.add(card);
+          }
+
+          case DISCIPLE -> {
+            Card card = new Disciple(inputCard.getMana(), inputCard.getAttackDamage(),
                 inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
                 inputCard.getName(), BACK_ROW, NOT_TANK);
-            break;
+            listOfCards.add(card);
+          }
 
-          case DISCIPLE:
-            card = new Disciple(inputCard.getMana(), inputCard.getAttackDamage(),
-                inputCard.getHealth(), inputCard.getDescription(), inputCard.getColors(),
-                inputCard.getName(), BACK_ROW, NOT_TANK);
-            break;
-
-          case FIRESTORM:
-            card = new Firestorm(inputCard.getMana(), inputCard.getDescription(),
+          case FIRESTORM -> {
+            Card card = new Firestorm(inputCard.getMana(), inputCard.getDescription(),
                 inputCard.getColors(), inputCard.getName());
-            break;
+            listOfCards.add(card);
+          }
 
-          case WINTERFELL:
-            card = new Winterfell(inputCard.getMana(), inputCard.getDescription(),
+          case WINTERFELL -> {
+            Card card = new Winterfell(inputCard.getMana(), inputCard.getDescription(),
                 inputCard.getColors(), inputCard.getName());
-            break;
+            listOfCards.add(card);
+          }
 
-          case HEART_HOUND:
-            card = new HeartHound(inputCard.getMana(), inputCard.getDescription(),
+          case HEART_HOUND -> {
+            Card card = new HeartHound(inputCard.getMana(), inputCard.getDescription(),
                 inputCard.getColors(), inputCard.getName());
-            break;
+            listOfCards.add(card);
+          }
 
-          default:
-            break;
+          default -> { }
         }
-        listOfCards.add(card);
       }
       deck.setCards(listOfCards);
       listOfDecks.add(deck);
@@ -156,34 +162,34 @@ public final class Utils {
    * @param inputHero the hero to set it to
    */
   public static void setPlayerHero(final Player player, final CardInput inputHero) {
-    Hero playerHero = null;
-
     // construct the player's hero based on its type
     switch (inputHero.getName()) {
-      case LORD_ROYCE:
-        playerHero = new LordRoyce(inputHero.getMana(), inputHero.getDescription(),
+      case LORD_ROYCE -> {
+        Hero playerHero = new LordRoyce(inputHero.getMana(), inputHero.getDescription(),
             inputHero.getColors(), inputHero.getName());
-        break;
+        player.setHero(playerHero);
+      }
 
-      case EMPRESS_THORINA:
-        playerHero = new EmpressThorina(inputHero.getMana(), inputHero.getDescription(),
+      case EMPRESS_THORINA -> {
+        Hero playerHero = new EmpressThorina(inputHero.getMana(), inputHero.getDescription(),
             inputHero.getColors(), inputHero.getName());
-        break;
+        player.setHero(playerHero);
+      }
 
-      case KING_MUDFACE:
-        playerHero = new KingMudface(inputHero.getMana(), inputHero.getDescription(),
+      case KING_MUDFACE -> {
+        Hero playerHero = new KingMudface(inputHero.getMana(), inputHero.getDescription(),
             inputHero.getColors(), inputHero.getName());
-        break;
+        player.setHero(playerHero);
+      }
 
-      case GENERAL_KOCIORAW:
-        playerHero = new GeneralKocioraw(inputHero.getMana(), inputHero.getDescription(),
+      case GENERAL_KOCIORAW -> {
+        Hero playerHero = new GeneralKocioraw(inputHero.getMana(), inputHero.getDescription(),
             inputHero.getColors(), inputHero.getName());
-        break;
+        player.setHero(playerHero);
+      }
 
-      default:
-        break;
+      default -> { }
     }
-    player.setHero(playerHero);
   }
 
   /**
