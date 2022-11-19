@@ -32,7 +32,12 @@ public class Player {
 
   public void setCurrentDeck(int chosenDeckIndex) {
     currentDeck = new Deck();
-    ArrayList<Card> deckCopy = new ArrayList<>(decks.get(chosenDeckIndex).getCards());
+    ArrayList<Card> deckCopy = new ArrayList<>();
+
+    for (Card card : decks.get(chosenDeckIndex).getCards()) {
+      Card copyCard = card.makeCopy();
+      deckCopy.add(copyCard);
+    }
     currentDeck.setCards(deckCopy);
   }
 

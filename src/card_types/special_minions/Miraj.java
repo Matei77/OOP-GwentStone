@@ -1,6 +1,8 @@
 package card_types.special_minions;
 
 import java.util.ArrayList;
+
+import card_types.Card;
 import card_types.Minion;
 import game_engine.GameActions;
 import game_engine.GameEngine;
@@ -39,5 +41,11 @@ public class Miraj extends Minion {
     this.setHealth(enemyMinion.getHealth());
     enemyMinion.setHealth(aux);
     this.setActionAvailable(ACTION_NOT_AVAILABLE);
+  }
+
+  @Override
+  public Card makeCopy() {
+    return new Miraj(this.getManaCost(), this.getAttackDamage(), this.getHealth(),
+        this.getDescription(), this.getColors(), this.getName(), this.getRowPlacement(), this.isTank());
   }
 }

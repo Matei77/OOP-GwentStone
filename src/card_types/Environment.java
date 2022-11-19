@@ -33,4 +33,9 @@ public class Environment extends Card {
   }
 
   public void castEffect(int affectedRow) {}
+
+  @Override
+  public Card makeCopy () {
+      return new Environment(this.getManaCost(), this.getDescription(), this.getColors(), this.getName());
+  }
 }

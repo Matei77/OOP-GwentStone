@@ -1,5 +1,6 @@
 package card_types.environment_cards;
 
+import card_types.Card;
 import card_types.Environment;
 import card_types.Minion;
 import game_engine.GameEngine;
@@ -20,5 +21,11 @@ public class Winterfell extends Environment {
     Player player = GameEngine.getCurrentPlayer();
     player.getCardsInHand().remove(this);
     player.setMana(player.getMana() - this.getManaCost());
+  }
+
+  @Override
+  public Card makeCopy () {
+    return new Winterfell(this.getManaCost(), this.getDescription(), this.getColors(),
+        this.getName());
   }
 }

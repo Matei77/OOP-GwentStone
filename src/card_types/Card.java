@@ -23,6 +23,8 @@ abstract public class Card {
 
   public void useEnvironment() {}
 
+  public Card makeCopy() { return null; }
+
   public int getHealth() {
     return -1;
   }

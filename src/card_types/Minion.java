@@ -1,5 +1,8 @@
 package card_types;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import game_engine.GameActions;
 import game_engine.GameEngine;
 import player.Player;
@@ -7,6 +10,7 @@ import utils.ErrorHandler;
 import utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static utils.Constants.*;
 
@@ -57,6 +61,55 @@ public class Minion extends Card{
   @Override
   public void useEnvironment() {
     ErrorHandler.ThrowError("Chosen card is not of type environment.");
+  }
+
+  @Override
+  public Card makeCopy() {
+    return new Minion(this.getManaCost(), this.getAttackDamage(), this.getHealth(),
+        this.getDescription(), this.getColors(), this.getName(), this.getRowPlacement(), this.isTank());
+  }
+
+  public void attackHero() {
+    if (this.isFrozen()) {
+      ErrorHandler.ThrowError("Attacker card is frozen.");
+      return;
+    }
+
+    if (!this.isActionAvailable()) {
+      ErrorHandler.ThrowError("Attacker card has already attacked this turn.");
+      return;
+    }
+
+    if (Utils.enemyHasTank()) {
+      ErrorHandler.ThrowError("Attacked card is not of type 'Tank'.");
+      return;
+    }
+
+    Hero attackedPlayerHero;
+    if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN)
+      attackedPlayerHero =  GameEngine.getEngine().getPlayerTwo().getHero();
+    else
+      attackedPlayerHero =  GameEngine.getEngine().getPlayerOne().getHero();
+
+
+    attackedPlayerHero.setHealth(attackedPlayerHero.getHealth() - this.getAttackDamage());
+    if (attackedPlayerHero.getHealth() <= 0) {
+      ObjectMapper mapper = new ObjectMapper();
+      ObjectNode outputObjectNode = mapper.createObjectNode();
+      if (GameEngine.getEngine().getPlayerTurn() == PLAYER_ONE_TURN) {
+        outputObjectNode.put("gameEnded", "Player one killed the enemy hero.");
+        GameEngine.getEngine().setPlayerOneWins(GameEngine.getEngine().getPlayerOneWins() + 1);
+      }
+      else {
+        outputObjectNode.put("gameEnded", "Player two killed the enemy hero.");
+        GameEngine.getEngine().setPlayerTwoWins(GameEngine.getEngine().getPlayerTwoWins() + 1);
+      }
+      ArrayNode output = GameEngine.getEngine().getOutput();
+      output.addAll(List.of(outputObjectNode));
+
+      GameEngine.getEngine().setGameEnded(true);
+    }
+    this.setActionAvailable(ACTION_NOT_AVAILABLE);
   }
 
   public void useAttack() {
