@@ -12,6 +12,14 @@ import java.util.ArrayList;
 
 import static utils.Constants.ACTION_NOT_AVAILABLE;
 
+/**
+ * Represents the EmpressThorina type hero card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class EmpressThorina extends Hero {
   public EmpressThorina(final int manaCost, final String description,
                         final ArrayList<String> colors, final String name) {

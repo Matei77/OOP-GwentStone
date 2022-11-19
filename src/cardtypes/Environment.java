@@ -7,6 +7,14 @@ import utils.ErrorHandler;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an environment card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class Environment extends Card {
   public Environment(final int manaCost, final String description, final ArrayList<String> colors,
                      final String name) {
@@ -62,7 +70,7 @@ public class Environment extends Card {
   }
 
   /**
-   * @return a copy of this environment card
+   * Make a copy of this environment card.
    */
   @Override
   public Card makeCopy() {

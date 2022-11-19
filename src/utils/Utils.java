@@ -269,7 +269,7 @@ public final class Utils {
   /**
    * Check whether the enemy has a tank minion on its side of the board.
    *
-   * @return 'true' if the enemy has a tank and 'false' otherwise
+   * @return <b>true</b> if the enemy has a tank and <b>false</b> otherwise
    */
   public static boolean enemyHasTank() {
     Player player = GameEngine.getCurrentPlayer();

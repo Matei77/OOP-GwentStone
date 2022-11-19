@@ -13,6 +13,14 @@ import java.util.ArrayList;
 import static utils.Constants.ACTION_NOT_AVAILABLE;
 import static utils.Constants.FROZEN;
 
+/**
+ * Represents the LordRoyce type hero card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class LordRoyce extends Hero {
 
   public LordRoyce(final int manaCost, final String description, final ArrayList<String> colors,

@@ -17,6 +17,14 @@ import static utils.Constants.FRONT_ROW;
 import static utils.Constants.MAX_CARDS_PER_ROW;
 import static utils.Constants.PLAYER_ONE_TURN;
 
+/**
+ * Represents a minion card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class Minion extends Card {
   private int health;
   private int attackDamage;

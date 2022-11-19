@@ -8,6 +8,14 @@ import player.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Winterfell type environment card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class Winterfell extends Environment {
   public Winterfell(final int manaCost, final String description, final ArrayList<String> colors,
                     final String name) {

@@ -9,6 +9,14 @@ import utils.Utils;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a Firestorm type environment card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class Firestorm extends Environment {
 
   public Firestorm(final int manaCost, final String description, final ArrayList<String> colors,

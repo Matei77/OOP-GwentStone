@@ -11,6 +11,14 @@ import utils.ErrorHandler;
 
 import static utils.Constants.ACTION_NOT_AVAILABLE;
 
+/**
+ * Represents a Disciple type minion card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class Disciple extends Minion {
   public Disciple(final int manaCost, final int attackDamage, final int health,
                   final String description, final ArrayList<String> colors, final String name,

@@ -11,6 +11,14 @@ import java.util.ArrayList;
 
 import static utils.Constants.ACTION_NOT_AVAILABLE;
 
+/**
+ * Represents the KingMudface type hero card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class KingMudface extends Hero {
   public KingMudface(final int manaCost, final String description, final ArrayList<String> colors,
                      final String name) {
@@ -33,10 +41,8 @@ public class KingMudface extends Hero {
       return;
     }
 
-    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
-
     // give +1 health to all minions on the affected row
-    for (Minion minion : board.get(affectedRow)) {
+    for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
       minion.setHealth(minion.getHealth() + 1);
     }
 

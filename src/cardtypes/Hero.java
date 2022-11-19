@@ -9,6 +9,14 @@ import java.util.ArrayList;
 import static utils.Constants.ACTION_AVAILABLE;
 import static utils.Constants.HERO_STARTING_HEALTH;
 
+/**
+ * Represents a hero card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class Hero extends Card {
   private int health = HERO_STARTING_HEALTH;
   private boolean actionAvailable = ACTION_AVAILABLE;

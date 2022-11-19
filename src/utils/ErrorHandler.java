@@ -21,6 +21,7 @@ public final class ErrorHandler {
 
   /**
    * Create error output for a command.
+   *
    * @param message the message shown in the error output
    */
   public static void throwError(final String message) {

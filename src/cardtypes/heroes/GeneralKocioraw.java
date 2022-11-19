@@ -11,6 +11,14 @@ import java.util.ArrayList;
 
 import static utils.Constants.ACTION_NOT_AVAILABLE;
 
+/**
+ * Represents the GeneralKocioraw type hero card.
+ *
+ * @author Ionescu Matei-Stefan
+ * @group 323CAb
+ * @year 2022-2023
+ * @project GwentStone
+ */
 public class GeneralKocioraw extends Hero {
   public GeneralKocioraw(final int manaCost, final String description,
                          final ArrayList<String> colors, final String name) {
@@ -33,10 +41,8 @@ public class GeneralKocioraw extends Hero {
       return;
     }
 
-    ArrayList<ArrayList<Minion>> board = GameEngine.getEngine().getBoard();
-
     // give +1 attack to the all the minions on the affected row
-    for (Minion minion : board.get(affectedRow)) {
+    for (Minion minion : GameEngine.getEngine().getBoard().get(affectedRow)) {
       minion.setAttackDamage(minion.getAttackDamage() + 1);
     }
 
