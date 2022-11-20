@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package engine;
 
 import cardtypes.Card;
@@ -36,6 +38,9 @@ import static utils.Constants.USE_ATTACK_HERO;
 import static utils.Constants.USE_ENVIRONMENT_CARD;
 import static utils.Constants.USE_HERO_ABILITY;
 
+/**
+ * Incorporates all actions that can be performed during games.
+ */
 public final class GameActions {
   private GameActions() {
   }

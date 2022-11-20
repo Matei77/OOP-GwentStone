@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package player;
 
 import cardtypes.Card;
@@ -5,6 +7,9 @@ import cardtypes.Hero;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a player.
+ */
 public final class Player {
   private ArrayList<Deck> decks;
   private Deck currentDeck;
@@ -21,6 +26,7 @@ public final class Player {
 
   /**
    * Set the currentDeck to be a copy of the deck at the chosen index.
+   *
    * @param chosenDeckIndex the index of the wanted deck from the array of decks
    */
   public void setCurrentDeck(final int chosenDeckIndex) {

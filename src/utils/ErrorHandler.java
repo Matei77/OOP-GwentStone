@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +18,9 @@ import static utils.Constants.USE_ATTACK_HERO;
 import static utils.Constants.USE_ENVIRONMENT_CARD;
 import static utils.Constants.USE_HERO_ABILITY;
 
+/**
+ * Incorporates the error handling functionalities.
+ */
 public final class ErrorHandler {
   private ErrorHandler() { }
 

@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package engine;
 
 import cardtypes.Card;
@@ -26,6 +28,9 @@ import static utils.Constants.GET_PLAYER_TURN;
 import static utils.Constants.GET_PLAYER_TWO_WINS;
 import static utils.Constants.GET_TOTAL_GAMES_PLAYED;
 
+/**
+ * Incorporates all debugging functionalities.
+ */
 public final class Debug {
   private Debug() { }
 

@@ -1,4 +1,6 @@
-package cardtypes.environment_cards;
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
+package cardtypes.environment;
 
 import cardtypes.Card;
 import cardtypes.Environment;
@@ -15,14 +17,17 @@ import static utils.Constants.MAX_ROW_INDEX;
 
 /**
  * Represents a HeartHound type environment card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class HeartHound extends Environment {
+public final class HeartHound extends Environment {
 
+  /**
+   * Constructor for new HeartHound card.
+   *
+   * @param manaCost the mana cost for the card to be played
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   */
   public HeartHound(final int manaCost, final String description, final ArrayList<String> colors,
                     final String name) {
     super(manaCost, description, colors, name);
@@ -31,7 +36,8 @@ public class HeartHound extends Environment {
   /**
    * Steal the highest health minion from the opponent's affected row and add it to the current
    * player's mirrored row.
-   * @param affectedRow the row on which the effect is cast
+   *
+   * @param affectedRow the row on which the effect is used
    */
   @Override
   public void castEffect(final int affectedRow) {
@@ -57,7 +63,7 @@ public class HeartHound extends Environment {
   }
 
   /**
-   * @return a copy of this HeartHound card
+   * Make a copy of this HeartHound card.
    */
   @Override
   public Card makeCopy() {

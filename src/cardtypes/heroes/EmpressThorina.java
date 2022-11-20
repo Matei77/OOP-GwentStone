@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package cardtypes.heroes;
 
 import cardtypes.Hero;
@@ -14,20 +16,24 @@ import static utils.Constants.ACTION_NOT_AVAILABLE;
 
 /**
  * Represents the EmpressThorina type hero card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class EmpressThorina extends Hero {
+public final class EmpressThorina extends Hero {
+
+  /**
+   * Constructor for new EmpressThorina hero card.
+   *
+   * @param manaCost the mana cost for the hero card to use its ability
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   */
   public EmpressThorina(final int manaCost, final String description,
                         final ArrayList<String> colors, final String name) {
     super(manaCost, description, colors, name);
   }
 
   /**
-   * Destroy the highest health minion on the affected row. The affect row is taken from the
+   * Destroy the highest health minion on the affected row. The affected row is taken from the
    * current action.
    */
   @Override
