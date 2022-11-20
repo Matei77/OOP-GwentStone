@@ -1,5 +1,10 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package utils;
 
+/**
+ * Incorporates all constants used in the game.
+ */
 public final class Constants {
   private Constants() { }
   public static final int HERO_STARTING_HEALTH = 30;

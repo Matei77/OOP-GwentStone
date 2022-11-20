@@ -1,4 +1,6 @@
-package cardtypes.environment_cards;
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
+package cardtypes.environment;
 
 import cardtypes.Card;
 import cardtypes.Environment;
@@ -10,13 +12,17 @@ import java.util.ArrayList;
 
 /**
  * Represents a Winterfell type environment card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class Winterfell extends Environment {
+public final class Winterfell extends Environment {
+
+  /**
+   * Constructor for new Winterfell card.
+   *
+   * @param manaCost the mana cost for the card to be played
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   */
   public Winterfell(final int manaCost, final String description, final ArrayList<String> colors,
                     final String name) {
     super(manaCost, description, colors, name);
@@ -24,7 +30,8 @@ public class Winterfell extends Environment {
 
   /**
    * Freeze all cards on the affectedRow.
-   * @param affectedRow the row on which the effect is cast
+   *
+   * @param affectedRow the row on which the effect is used
    */
   @Override
   public void castEffect(final int affectedRow) {
@@ -42,7 +49,7 @@ public class Winterfell extends Environment {
   }
 
   /**
-   * @return a copy of this Winterfell card
+   * Make a copy of this Winterfell card.
    */
   @Override
   public Card makeCopy() {

@@ -1,4 +1,6 @@
-package cardtypes.environment_cards;
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
+package cardtypes.environment;
 
 import cardtypes.Card;
 import cardtypes.Environment;
@@ -11,14 +13,17 @@ import java.util.ArrayList;
 
 /**
  * Represents a Firestorm type environment card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class Firestorm extends Environment {
+public final class Firestorm extends Environment {
 
+  /**
+   * Constructor for new Firestorm card.
+   *
+   * @param manaCost the mana cost for the card to be played
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   */
   public Firestorm(final int manaCost, final String description, final ArrayList<String> colors,
                    final String name) {
     super(manaCost, description, colors, name);
@@ -26,7 +31,8 @@ public class Firestorm extends Environment {
 
   /**
    * Deal 1 damage to each minion on the affectedRow.
-   * @param affectedRow the row on which the effect is cast
+   *
+   * @param affectedRow the row on which the effect is used
    */
   @Override
   public void castEffect(final int affectedRow) {
@@ -47,7 +53,7 @@ public class Firestorm extends Environment {
   }
 
   /**
-   * @return a copy of this Firestorm card
+   * Make a copy of this Firestorm card.
    */
   @Override
   public Card makeCopy() {

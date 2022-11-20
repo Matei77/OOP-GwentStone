@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package cardtypes;
 
 import engine.GameActions;
@@ -9,13 +11,18 @@ import java.util.ArrayList;
 
 /**
  * Represents an environment card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class Environment extends Card {
+public abstract class Environment extends Card {
+
+
+  /**
+   * Helper constructor for new environment card. Cannot be used to instantiate a new environment
+   * card. Derived classes should be used.
+   *
+   * @see cardtypes.environment.Firestorm#Firestorm(int, String, ArrayList, String)  Firestorm
+   * @see cardtypes.environment.HeartHound#HeartHound(int, String, ArrayList, String)  HeartHound
+   * @see cardtypes.environment.Winterfell#Winterfell(int, String, ArrayList, String)  Winterfell
+   */
   public Environment(final int manaCost, final String description, final ArrayList<String> colors,
                      final String name) {
     super(manaCost, description, colors, name);
@@ -61,20 +68,10 @@ public class Environment extends Card {
    * Cast an effect on the affected row. The effect will be different based on what type the
    * environment card is.
    *
-   * @param affectedRow the row on which the effect is cast
-   * @see cardtypes.environment_cards.Firestorm#castEffect
-   * @see cardtypes.environment_cards.HeartHound#castEffect
-   * @see cardtypes.environment_cards.Winterfell#castEffect
+   * @param affectedRow the row on which the effect is used
+   * @see cardtypes.environment.Firestorm#castEffect(int) Firestorm
+   * @see cardtypes.environment.HeartHound#castEffect(int) HeartHound
+   * @see cardtypes.environment.Winterfell#castEffect(int) Winterfell
    */
-  public void castEffect(final int affectedRow) {
-  }
-
-  /**
-   * Make a copy of this environment card.
-   */
-  @Override
-  public Card makeCopy() {
-    return new Environment(this.getManaCost(), this.getDescription(), this.getColors(),
-        this.getName());
-  }
+  public void castEffect(final int affectedRow) { }
 }

@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package cardtypes.heroes;
 
 import cardtypes.Hero;
@@ -13,20 +15,24 @@ import static utils.Constants.ACTION_NOT_AVAILABLE;
 
 /**
  * Represents the KingMudface type hero card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class KingMudface extends Hero {
+public final class KingMudface extends Hero {
+
+  /**
+   * Constructor for new KingMudface hero card.
+   *
+   * @param manaCost the mana cost for the hero card to use its ability
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   */
   public KingMudface(final int manaCost, final String description, final ArrayList<String> colors,
                      final String name) {
     super(manaCost, description, colors, name);
   }
 
   /**
-   * Give +1 health to all the minions on the affected row. The affect row is taken from the
+   * Give +1 health to all the minions on the affected row. The affected row is taken from the
    * current action.
    */
   @Override

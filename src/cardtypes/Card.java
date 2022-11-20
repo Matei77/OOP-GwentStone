@@ -1,14 +1,11 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package cardtypes;
 
 import java.util.ArrayList;
 
 /**
  * Represents a card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
 public abstract class Card {
   private final int manaCost;
@@ -18,7 +15,12 @@ public abstract class Card {
 
 
   /**
-   * Constructor for new Card.
+   * Helper constructor for new card. Cannot be used to instantiate a new card. Derived classes
+   * should be used.
+   *
+   * @see Minion#Minion(int, int, int, String, ArrayList, String, int, boolean)  Minion
+   * @see Environment#Environment(int, String, ArrayList, String)  Environment
+   * @see Hero#Hero(int, String, ArrayList, String)  Hero
    */
   public Card(final int manaCost, final String description, final ArrayList<String> colors,
               final String name) {
@@ -48,7 +50,9 @@ public abstract class Card {
   public void useEnvironment() { }
 
   /**
-   * Make a copy of this card.
+   * Make a copy of this card. Has no effect on hero cards.
+   *
+   * @return a new card, identical to the one that the method is used on
    */
   public Card makeCopy() {
     return null;

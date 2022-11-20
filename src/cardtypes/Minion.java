@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package cardtypes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,11 +21,6 @@ import static utils.Constants.PLAYER_ONE_TURN;
 
 /**
  * Represents a minion card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
 public class Minion extends Card {
   private int health;
@@ -34,6 +31,28 @@ public class Minion extends Card {
   private boolean actionAvailable = true;
 
 
+  /**
+   * Constructor for new minion card. Minions with special abilities need to be constructed using
+   * their unique classes.
+   *
+   * @see cardtypes.specialminions.Disciple#Disciple(int, int, int, String, ArrayList, String,
+   *   int, boolean)  Disciple
+   * @see cardtypes.specialminions.Miraj#Miraj(int, int, int, String, ArrayList, String, int,
+   *   boolean)  Miraj
+   * @see cardtypes.specialminions.TheCursedOne#TheCursedOne(int, int, int, String, ArrayList,
+   *   String, int, boolean)  TheCursedOne
+   * @see cardtypes.specialminions.TheRipper#TheRipper(int, int, int, String, ArrayList, String,
+   *   int, boolean)  TheRipper
+   *
+   * @param manaCost the mana cost of placing the minion on the board
+   * @param attackDamage the attackDamage of the minion
+   * @param health the health of the minion
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   * @param rowPlacement the row on which the card should be played; 1 for FrontRow; 2 for BackRow
+   * @param tank whether the minion is a tank or not
+   */
   public Minion(final int manaCost, final int attackDamage, final int health,
                 final String description, final ArrayList<String> colors, final String name,
                 final int rowPlacement, final boolean tank) {
@@ -89,7 +108,7 @@ public class Minion extends Card {
   }
 
   /**
-   * @return a copy of this Minion card
+   * Make a copy of this Minion card.
    */
   @Override
   public Card makeCopy() {
@@ -223,10 +242,10 @@ public class Minion extends Card {
   /**
    * Use the special ability of this minion. The effect will be different based on the type of the
    * minion using the ability.
-   * @see cardtypes.special_minions.Disciple#useAbility()
-   * @see cardtypes.special_minions.Miraj#useAbility()
-   * @see cardtypes.special_minions.TheCursedOne#useAbility()
-   * @see cardtypes.special_minions.TheRipper#useAbility()
+   * @see cardtypes.specialminions.Disciple#useAbility()
+   * @see cardtypes.specialminions.Miraj#useAbility()
+   * @see cardtypes.specialminions.TheCursedOne#useAbility()
+   * @see cardtypes.specialminions.TheRipper#useAbility()
    */
   public void useAbility() { }
 

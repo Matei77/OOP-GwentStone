@@ -1,4 +1,6 @@
-package cardtypes.special_minions;
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
+package cardtypes.specialminions;
 
 import java.util.ArrayList;
 
@@ -14,13 +16,21 @@ import static utils.Constants.ACTION_NOT_AVAILABLE;
 
 /**
  * Represents a TheRipper type minion card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class TheRipper extends Minion {
+public final class TheRipper extends Minion {
+
+  /**
+   * Constructor for new TheRipper type minion card.
+   *
+   * @param manaCost the mana cost of placing the minion on the board
+   * @param attackDamage the attackDamage of the minion
+   * @param health the health of the minion
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   * @param rowPlacement the row on which the card should be played; 1 for FrontRow; 2 for BackRow
+   * @param tank whether the minion is a tank or not
+   */
   public TheRipper(final int manaCost, final int attackDamage, final int health,
                    final String description, final ArrayList<String> colors, final String name,
                    final int rowPlacement, final boolean tank) {
@@ -59,7 +69,7 @@ public class TheRipper extends Minion {
   }
 
   /**
-   * @return a copy of this TheRipper card.
+   * Make a copy of this TheRipper card.
    */
   public Card makeCopy() {
     return new TheRipper(this.getManaCost(), this.getAttackDamage(), this.getHealth(),

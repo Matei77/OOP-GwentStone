@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package cardtypes.heroes;
 
 import cardtypes.Hero;
@@ -15,21 +17,24 @@ import static utils.Constants.FROZEN;
 
 /**
  * Represents the LordRoyce type hero card.
- *
- * @author Ionescu Matei-Stefan
- * @group 323CAb
- * @year 2022-2023
- * @project GwentStone
  */
-public class LordRoyce extends Hero {
+public final class LordRoyce extends Hero {
 
+  /**
+   * Constructor for new LordRoyce hero card.
+   *
+   * @param manaCost the mana cost for the hero card to use its ability
+   * @param description  the description of the card
+   * @param colors the colors on the card
+   * @param name the name of the card
+   */
   public LordRoyce(final int manaCost, final String description, final ArrayList<String> colors,
                    final String name) {
     super(manaCost, description, colors, name);
   }
 
   /**
-   * Freeze the highest attack minion on the affected row. The affect row is taken from the
+   * Freeze the highest attack minion on the affected row. The affected row is taken from the
    * current action.
    */
   @Override

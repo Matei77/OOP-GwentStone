@@ -1,11 +1,13 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package utils;
 
 import cardtypes.Card;
 import cardtypes.Hero;
 import cardtypes.Minion;
-import cardtypes.environment_cards.Firestorm;
-import cardtypes.environment_cards.HeartHound;
-import cardtypes.environment_cards.Winterfell;
+import cardtypes.environment.Firestorm;
+import cardtypes.environment.HeartHound;
+import cardtypes.environment.Winterfell;
 import fileio.CardInput;
 import fileio.DecksInput;
 import engine.GameEngine;
@@ -15,10 +17,10 @@ import cardtypes.heroes.EmpressThorina;
 import cardtypes.heroes.GeneralKocioraw;
 import cardtypes.heroes.KingMudface;
 import cardtypes.heroes.LordRoyce;
-import cardtypes.special_minions.Disciple;
-import cardtypes.special_minions.Miraj;
-import cardtypes.special_minions.TheCursedOne;
-import cardtypes.special_minions.TheRipper;
+import cardtypes.specialminions.Disciple;
+import cardtypes.specialminions.Miraj;
+import cardtypes.specialminions.TheCursedOne;
+import cardtypes.specialminions.TheRipper;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,9 @@ import static utils.Constants.THE_RIPPER;
 import static utils.Constants.WARDEN;
 import static utils.Constants.WINTERFELL;
 
+/**
+ * Incorporates utility methods.
+ */
 public final class Utils {
   private Utils() {
   }
@@ -275,7 +280,7 @@ public final class Utils {
   /**
    * Check whether the enemy has a tank minion on its side of the board.
    *
-   * @return <b>true</b> if the enemy has a tank and <b>false</b> otherwise
+   * @return true if the enemy has a tank and false otherwise
    */
   public static boolean enemyHasTank() {
     Player player = GameEngine.getCurrentPlayer();

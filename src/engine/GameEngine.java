@@ -1,3 +1,5 @@
+/* Copyright Ionescu Matei-Stefan - 323CAb - 2022-2023 */
+
 package engine;
 
 import cardtypes.Minion;
@@ -14,6 +16,10 @@ import static utils.Constants.PLAYER_ONE_TURN;
 import static utils.Constants.PLAYER_TWO_BACK_ROW;
 import static utils.Constants.PLAYER_TWO_FRONT_ROW;
 
+/**
+ * Contains the core elements of the game. Implemented using the Singleton Design Pattern to only
+ * allow one instantiation of the class.
+ */
 public final class GameEngine {
   private static GameEngine instance = null;
   private GameEngine() { }
