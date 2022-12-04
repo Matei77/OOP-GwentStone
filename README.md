@@ -101,7 +101,7 @@ These commands are implemented in the `engine.GameActions` class.
 
 8. useEnvironmentCard
 
-   This command lets a player use an environment card from its hand.
+   _This command lets a player use an environment card from its hand._
 
    When the _useEnvironmentCard_ command is given, the `useEnvironment()` method 
    will be called on the selected card from the player's hand. This will 
