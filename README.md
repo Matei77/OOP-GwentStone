@@ -99,7 +99,7 @@ These commands are implemented in the `engine.GameActions` class.
    differently based on the type of hero that the player possesses.
 
 
-8. useEnvironmentCard
+8. **useEnvironmentCard**
 
    _This command lets a player use an environment card from its hand._
 
