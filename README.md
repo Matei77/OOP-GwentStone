@@ -6,7 +6,7 @@
 ## Summary:
 
 **GwentStone** implements the core mechanics of board games like Hearthstone 
-and Gwent using OOP concepts. The application receives a list of command 
+and Gwent using OOP concepts. The application receives a list of commands 
 from a file in _json_ format and generates a new _json_ file with the 
 required output for each command.
 
